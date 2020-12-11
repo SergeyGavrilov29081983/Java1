@@ -14,8 +14,4 @@ public class AccuracyDoubleFloat {
         return volumeBallDouble(radius) - volumeBallFloat((float) radius);
     }
 
-    public static void main(String[] args) {
-        System.out.println(calculateAccuracy(1));
-    }
-
 }
