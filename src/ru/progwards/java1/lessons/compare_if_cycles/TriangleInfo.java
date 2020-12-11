@@ -3,9 +3,10 @@ package ru.progwards.java1.lessons.compare_if_cycles;
 public class TriangleInfo {
 
     public static boolean isTriangle(int a, int b, int c) {
-        if (a < c + b) return true;
-        if (b < a + c) return true;
-        return c < a + b;
+        if (a >= b + c) return false;
+        if (b >= a + c) return false;
+        if (c >= a + b) return false;
+        return true;
     }
 
     public static boolean isRightTriangle(int a, int b, int c) {
@@ -20,7 +21,7 @@ public class TriangleInfo {
     }
 
     public static void main(String[] args) {
-        System.out.println(isTriangle( 3, 4, 5));
+        System.out.println(isTriangle(4, 1, 5));
         System.out.println(isRightTriangle(3, 4, 5));
     }
 }
