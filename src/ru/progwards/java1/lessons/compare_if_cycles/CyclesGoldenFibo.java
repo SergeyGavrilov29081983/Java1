@@ -25,23 +25,46 @@ public class CyclesGoldenFibo {
     }
 
     public static boolean isGoldenTriangle(int a, int b, int c) {
-        return a == b | a == c | b == c;
-               /* & (double) a / (double) b >= 1.61703 & (double) a / (double) b <= 1.61903
+        double ratio;
+        if (a == b || a == c || b == c) {
+            if (a < b && b == c) {
+                ratio = (double) b / a;
+                if (ratio >= 1.61703 && ratio <= 1.61903) {
+                    return true;
+                }
+            }
+            if (b < a && a == c) {
+                ratio = (double) b / a;
+                if (ratio >= 1.61703 && ratio <= 1.61903) {
+                    return true;
+                }
+            }
+            if (c < a && a == b) {
+                ratio = (double) a / c;
+                if (ratio >= 1.61703 && ratio <= 1.61903) {
+                    return true;
+                }
+            }
+        }
+
+
+               /* &&  (double) a / (double) b >= 1.61703 & (double) a / (double) b <= 1.61903
                 | (double) a / (double) c >= 1.61703 & (double) a / (double) c <= 1.61903
                 | (double) b / (double) c >= 1.61703 & (double) b / (double) c <= 1.61903;*/
+        return false;
     }
 
     public static void main(String[] args) {
-        for (int i = 1; i < 16; i++) {
+        /*for (int i = 1; i < 16; i++) {
             System.out.println(fiboNumber(i));
-        }
-        for (int i = 1; i < 16; i++) {
+        }*/
+        /*for (int i = 1; i < 16; i++) {
             if (isGoldenTriangle(fiboNumber(i), fiboNumber(i), fiboNumber(i + 1))) {
                 System.out.println(fiboNumber(i));
                 System.out.println(fiboNumber(i));
                 System.out.println(fiboNumber(i + 1));
             }
-        }
-        System.out.println(isGoldenTriangle(34, 55, 55));
+        }*/
+        System.out.println(isGoldenTriangle(34, 34, 55));
     }
 }
