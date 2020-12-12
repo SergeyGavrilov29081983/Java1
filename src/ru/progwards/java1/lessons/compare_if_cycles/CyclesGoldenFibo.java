@@ -25,7 +25,10 @@ public class CyclesGoldenFibo {
     }
 
     public static boolean isGoldenTriangle(int a, int b, int c) {
-        return a == b || a == c || b == c;
+        return a == b || a == c || b == c
+                && (double) a / b >= 1.6703 && (double) a / b <= 1.61903
+                || (double) b / c >= 1.6703 && (double) b / c <= 1.61903
+                || (double) a / c >= 1.6703 && (double) a / c <= 1.61903;
     }
 
     public static void main(String[] args) {
