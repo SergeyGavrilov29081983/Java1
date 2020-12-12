@@ -25,10 +25,10 @@ public class CyclesGoldenFibo {
     }
 
     public static boolean isGoldenTriangle(int a, int b, int c) {
-        return a == b || a == c || b == c
-                && (double) a / b >= 1.6703 && (double) a / b <= 1.61903
-                || (double) b / c >= 1.6703 && (double) b / c <= 1.61903
-                || (double) a / c >= 1.6703 && (double) a / c <= 1.61903;
+        return a == b | a == c | b == c;
+               /* & (double) a / (double) b >= 1.61703 & (double) a / (double) b <= 1.61903
+                | (double) a / (double) c >= 1.61703 & (double) a / (double) c <= 1.61903
+                | (double) b / (double) c >= 1.61703 & (double) b / (double) c <= 1.61903;*/
     }
 
     public static void main(String[] args) {
@@ -41,7 +41,7 @@ public class CyclesGoldenFibo {
                 System.out.println(fiboNumber(i));
                 System.out.println(fiboNumber(i + 1));
             }
-
         }
+        System.out.println(isGoldenTriangle(34, 55, 55));
     }
 }
