@@ -28,7 +28,7 @@ public class ComplexNum {
     }
 
     public ComplexNum mul(ComplexNum num) {
-        return new ComplexNum(this.a * num.a - this.b * num.b, this.b * num.a + this.a * this.b);
+        return new ComplexNum(this.a * num.a - this.b * num.b, this.b * num.a + this.a * num.b);
     }
 
     public ComplexNum div(ComplexNum num) {
