@@ -1,7 +1,5 @@
 package ru.progwards.java1.lessons.classes;
 
-import org.omg.CORBA.UNKNOWN;
-
 public class Duck extends Animal {
 
     public Duck(double weight) {
