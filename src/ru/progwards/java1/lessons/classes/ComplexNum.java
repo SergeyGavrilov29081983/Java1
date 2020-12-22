@@ -16,11 +16,11 @@ public class ComplexNum {
     }
 
     public ComplexNum add(ComplexNum num) {
+        a = this.a + num.a;
+        b = this.b + num.b;
+        return new ComplexNum(a, b);
 
-       // (a + b) + (c + d) = (a + c) + (b + d);
-
-
-       return null;
+       // (a + bi) + (c + di) = (a + c) + (b + d)i;
     }
 
 
