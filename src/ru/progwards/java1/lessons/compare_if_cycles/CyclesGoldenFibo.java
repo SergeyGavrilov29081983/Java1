@@ -50,17 +50,53 @@ public class CyclesGoldenFibo {
     }
 
     public static void main(String[] args) {
-        /*for (int i = 1; i < 16; i++) {
+        int side;
+        int base;
+        for (int i = 1; i < 16; i++) {
             System.out.println(fiboNumber(i));
-        }*/
-        /*for (int i = 1; i < 16; i++) {
-            if (isGoldenTriangle(fiboNumber(i), fiboNumber(i), fiboNumber(i + 1))) {
-                System.out.println(fiboNumber(i));
-                System.out.println(fiboNumber(i));
-                System.out.println(fiboNumber(i + 1));
+            side = fiboNumber(i);
+            base = fiboNumber(i + 1);
+            if (isGoldenTriangle(side, side, base)) {
+                System.out.println(side);
+                System.out.println(side);
+                System.out.println(base);
             }
-        }*/
-        System.out.println(isGoldenTriangle(55, 34, 55));
+            for ( ; ; ) {
+
+
+
+            }
+
+        }
+    }
+
+    static int addAsStrings(int n1, int n2) {
+        return Integer.parseInt( String.valueOf(n1) + String.valueOf(n2));
+    }
+
+    static long factorial(long n) {
+        if(n == 0) return 1;
+        long result = 1;
+        for (int i = 1; i <= n; i++) {
+            result = result * i;
+        }
+        return result;
+    }
+
+
+
+    static String textGrade(int grade) {
+        if(grade == 0) return "не оценено";
+        if(grade >=1 && grade <20) return "очень плохо";
+        if(grade >=21 && grade <=40) return "плохо";
+        if(grade >=41 && grade <60) return "удовлетворительно";
+        if(grade >=61 && grade <80) return "хорошо";
+        if(grade >=81 && grade <100) return "отлично";
+        return "не определено";
 
     }
+
+
+
+
 }
