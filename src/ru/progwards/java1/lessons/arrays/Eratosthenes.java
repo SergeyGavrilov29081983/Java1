@@ -1,6 +1,5 @@
 package ru.progwards.java1.lessons.arrays;
 
-import java.sql.Struct;
 import java.util.Arrays;
 
 public class Eratosthenes {
