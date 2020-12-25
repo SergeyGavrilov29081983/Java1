@@ -7,6 +7,7 @@ public class DIntArray {
     private int[] array;
 
     public DIntArray() {
+        array = new int[0];
 
     }
 
