@@ -7,7 +7,6 @@ public class ArraySort {
         for (int i = 0; i < a.length; i++) {
             int min = a[i];
             int min_i = i;
-
             for (int j = i + 1; j < a.length; j++) {
                 if (a[j] < min) {
                     min = a[j];
