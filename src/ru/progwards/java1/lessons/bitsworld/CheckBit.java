@@ -3,7 +3,7 @@ package ru.progwards.java1.lessons.bitsworld;
 public class CheckBit {
 
     public static int checkBit(byte value, int bitNumber) {
-        return (byte) (value >> (bitNumber - 1));
+        return (value >> bitNumber) & 1;
     }
 
     public static void main(String[] args) {
