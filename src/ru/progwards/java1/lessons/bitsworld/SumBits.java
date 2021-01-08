@@ -2,16 +2,16 @@ package ru.progwards.java1.lessons.bitsworld;
 
 public class SumBits {
     public static int sumBits(byte value) {
-        int sum =  0;
-        for(byte b = 1; b !=  0; b <<= 1) {
-            if ((value & b) !=  0) sum++;
-        }
+        int sum = 0;
+            for (byte a = 1; a != 0; a <<= 1)
+                if ((value & a) !=  0) sum++;
         return sum;
-     }
+    }
+
 
     public static void main(String[] args) {
-        System.out.println(sumBits((byte) 65));
-        System.out.println((byte) 010010);
+        System.out.println(sumBits((byte) 32833));
+
     }
 
    /* 1.1 Реализовать функцию public static int sumBits(byte value),
@@ -22,5 +22,4 @@ public class SumBits {
 
     используйте & с числом 1 для того, чтобы оставить только один правый значащий бит;
     используйте сдвиг вправо для того, чтобы проверить следующий бит.*/
-
 }
