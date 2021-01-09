@@ -11,7 +11,7 @@ public class Binary {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for(int i = 7; i >= 0 ; i--) {
+        for(int i = 8; i >= 0 ; i--) {
             int mask = 1 << i;
             result.append((num & mask) != 0 ? "1" : "0");
         }
