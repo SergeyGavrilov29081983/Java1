@@ -11,9 +11,11 @@ public class Binary {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for(int i = 8; i >= 0 ; i--) {
+        if (num == 0) return result.append("000000000").toString();
+        for(int i = 7; i >= 0 ; i--) {
             int mask = 1 << i;
             result.append((num & mask) != 0 ? "1" : "0");
+
         }
         result.replace(result.length() - 1, result.length(), "");
         return result.toString();
