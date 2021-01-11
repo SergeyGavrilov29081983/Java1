@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.arrays;
 
-public class ArraySort {
+public final class ArraySort {
 
     public static void sort(int[] a) {
 
@@ -19,6 +19,10 @@ public class ArraySort {
                 a[min_i] = tmp;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        ArraySort arraySort = new ArraySort();
     }
 }
 
