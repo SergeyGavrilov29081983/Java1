@@ -1,5 +1,7 @@
 package ru.progwards.java1.lessons.classes;
 
+
+
 import ru.progwards.java1.lessons.interfaces.FoodCompare;
 
 import java.util.Objects;
