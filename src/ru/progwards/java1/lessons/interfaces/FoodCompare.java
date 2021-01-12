@@ -1,6 +1,7 @@
 package ru.progwards.java1.lessons.interfaces;
 
-public interface FoodCompare {
+import ru.progwards.java1.lessons.classes.Animal;
 
-    public int compareFoodPrice(Animal animal);
+public interface FoodCompare {
+    public int compareFoodPrice();
 }
