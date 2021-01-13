@@ -10,8 +10,9 @@ public class Animal implements FoodCompare {
 
     public FoodKind foodKind;
 
-    public Animal(double weight) {
+    public Animal(double weight, FoodKind foodKind) {
         this.weight = weight;
+        this.foodKind = foodKind;
     }
 
     public AnimalKind getKind() {
