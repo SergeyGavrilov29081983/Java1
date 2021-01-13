@@ -4,15 +4,17 @@ package ru.progwards.java1.lessons.interfaces;
 import java.util.Objects;
 
 
+import static ru.progwards.java1.lessons.interfaces.FoodKind.*;
+
 public class Animal implements FoodCompare {
 
     private double weight;
 
-    public FoodKind foodKind;
 
-    public Animal(double weight, FoodKind foodKind) {
+
+    public Animal(double weight) {
         this.weight = weight;
-        this.foodKind = foodKind;
+
     }
 
     public AnimalKind getKind() {
@@ -20,11 +22,11 @@ public class Animal implements FoodCompare {
     }
 
     public FoodKind getFoodKind() {
-        return FoodKind.UNKNOWN;
+        return UNKNOWN;
     }
 
     public double getFood1kgPrice() {
-        switch (foodKind) {
+        switch (FoodKind) {
             case HAY:
                 return 20;
             case CORN:
@@ -80,5 +82,9 @@ public class Animal implements FoodCompare {
         return Double.compare(this.getFoodPrice(), animal.getFoodPrice());
     }
 
+    public static void main(String[] args) {
+        Animal animal = new Animal(20);
+        System.out.println();
+    }
 
 }
