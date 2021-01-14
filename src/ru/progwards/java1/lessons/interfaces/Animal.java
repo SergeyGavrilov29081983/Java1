@@ -3,18 +3,15 @@ package ru.progwards.java1.lessons.interfaces;
 
 import java.util.Objects;
 
-
-import static ru.progwards.java1.lessons.interfaces.FoodKind.*;
+import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
 
 public class Animal implements FoodCompare {
 
+    FoodKind foodKind = getFoodKind();
     private double weight;
-
-
 
     public Animal(double weight) {
         this.weight = weight;
-
     }
 
     public AnimalKind getKind() {
@@ -26,22 +23,23 @@ public class Animal implements FoodCompare {
     }
 
     public double getFood1kgPrice() {
-        switch (FoodKind) {
+
+        switch (foodKind) {
             case HAY:
                 return 20;
             case CORN:
                 return 50;
             case UNKNOWN:
                 return 0;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     public double getFoodPrice() {
-        return  calculateFoodWeight() * getFood1kgPrice();
+        return calculateFoodWeight() * getFood1kgPrice();
 
     }
-
 
     public double getWeight() {
         return weight;
@@ -81,10 +79,8 @@ public class Animal implements FoodCompare {
     public int compareFoodPrice(Animal animal) {
         return Double.compare(this.getFoodPrice(), animal.getFoodPrice());
     }
-
     public static void main(String[] args) {
-        Animal animal = new Animal(20);
-        System.out.println();
+        Animal animal = new Cow(20);
+        System.out.println(animal.getFood1kgPrice());
     }
-
 }

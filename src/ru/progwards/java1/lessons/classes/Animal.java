@@ -1,12 +1,17 @@
 package ru.progwards.java1.lessons.classes;
 
 
+
+
 import java.util.Objects;
+
+import static ru.progwards.java1.lessons.interfaces.FoodKind.*;
 
 
 public class Animal implements FoodCompare{
 
     private double weight;
+    Animal animal;
 
     public FoodKind foodKind;
 
@@ -23,7 +28,7 @@ public class Animal implements FoodCompare{
     }
 
     public double getFood1kgPrice() {
-        switch (foodKind) {
+        switch (this.foodKind) {
             case HAY:
                 return 20;
             case CORN:
@@ -39,6 +44,9 @@ public class Animal implements FoodCompare{
 
     }
 
+public void setFoodKind(FoodKind foodKind) {
+        this.foodKind =foodKind;
+}
 
     public double getWeight() {
         return weight;
