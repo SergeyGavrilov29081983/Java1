@@ -80,7 +80,7 @@ public class Animal implements FoodCompare {
         return Double.compare(this.getFoodPrice(), animal.getFoodPrice());
     }
     public static void main(String[] args) {
-        Animal animal = new Cow(20);
+        Animal animal = new Cow(1D);
         System.out.println(animal.getFood1kgPrice());
     }
 }
