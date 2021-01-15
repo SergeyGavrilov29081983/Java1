@@ -5,13 +5,18 @@ import java.util.Objects;
 
 import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
 
-public class Animal implements FoodCompare {
+public class Animal implements FoodCompare, CompareWeight {
 
     FoodKind foodKind = getFoodKind();
     private double weight;
 
     public Animal(double weight) {
         this.weight = weight;
+    }
+
+    public static void main(String[] args) {
+        Animal animal = new Cow(1D);
+        System.out.println(animal.getFood1kgPrice());
     }
 
     public AnimalKind getKind() {
@@ -79,8 +84,11 @@ public class Animal implements FoodCompare {
     public int compareFoodPrice(Animal animal) {
         return Double.compare(this.getFoodPrice(), animal.getFoodPrice());
     }
-    public static void main(String[] args) {
-        Animal animal = new Cow(1D);
-        System.out.println(animal.getFood1kgPrice());
+
+    @Override
+    public CompareResult compareWeight(Animal animal) {
+        if (this.weight < animal.weight) return CompareResult.LESS;
+        if (this.weight == animal.weight) return CompareResult.EQUAL;
+        return CompareResult.GREATER;
     }
 }
