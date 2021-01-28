@@ -5,6 +5,7 @@ public class CalculateFibonacci {
     private static CacheInfo lastFibo;
 
     public static int fiboNumber(int n) {
+        lastFibo = getLastFibo();
         lastFibo.n = n;
         if (lastFibo.fibo == n) return lastFibo.fibo;
         int first;
@@ -19,16 +20,16 @@ public class CalculateFibonacci {
         return current;
     }
 
-    public static class CacheInfo{
-        public int n;
-        public int fibo;
-    }
-
     public static CacheInfo getLastFibo() {
-        return lastFibo;
+        return new CacheInfo();
     }
 
     public static void clearLastFibo() {
         lastFibo = null;
+    }
+
+    public static class CacheInfo {
+        public int n;
+        public int fibo;
     }
 }
