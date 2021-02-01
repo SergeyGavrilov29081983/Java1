@@ -1,6 +1,8 @@
 package ru.progwards.java1.lessons.interfaces;
 
 
+import ru.progwards.java1.lessons.arrays.ArraySort;
+
 import java.util.Objects;
 
 import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
@@ -9,6 +11,7 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
 
     FoodKind foodKind = getFoodKind();
     private double weight;
+    ArraySort sort;
 
     public Animal(double weight) {
         this.weight = weight;
