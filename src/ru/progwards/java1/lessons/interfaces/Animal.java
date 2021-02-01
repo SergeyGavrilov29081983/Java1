@@ -1,8 +1,5 @@
 package ru.progwards.java1.lessons.interfaces;
 
-
-import ru.progwards.java1.lessons.arrays.ArraySort;
-
 import java.util.Objects;
 
 import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
