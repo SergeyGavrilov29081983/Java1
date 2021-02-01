@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
 
-public class Animal implements FoodCompare, CompareWeight {
+public class Animal implements FoodCompare, CompareWeight<Animal> {
 
     FoodKind foodKind = getFoodKind();
     private double weight;
@@ -90,4 +90,8 @@ public class Animal implements FoodCompare, CompareWeight {
         if (this.weight == animal.weight) return CompareResult.EQUAL;
         return CompareResult.GREATER;
     }
+
+
+
+
 }

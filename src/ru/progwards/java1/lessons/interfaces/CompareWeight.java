@@ -1,26 +1,13 @@
 package ru.progwards.java1.lessons.interfaces;
 
-public interface CompareWeight {
+public interface CompareWeight<T> {
 
-    public CompareResult compareWeight(Animal animal);
+    public CompareResult compareWeight(T obj);
 
-    public static void sort(int[] a) {
-        for (int i = 0; i < a.length; i++) {
-            int min = a[i];
-            int min_i = i;
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[j] < min) {
-                    min = a[j];
-                    min_i = j;
-                }
-            }
-            if (i != min_i) {
-                int tmp = a[i];
-                a[i] = a[min_i];
-                a[min_i] = tmp;
-            }
-        }
-    }
+    //public void sort(int[] a);
+
+
+
 
     public enum CompareResult {
         LESS, EQUAL, GREATER;
