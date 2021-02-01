@@ -2,21 +2,21 @@ package ru.progwards.java1.lessons.interfaces;
 
 public final class ArraySort {
 
-    public static void sort(int[] a) {
+    public static void sort(Animal[] animals) {
 
-        for (int i = 0; i < a.length; i++) {
-            int min = a[i];
+        for (int i = 0; i < animals.length; i++) {
+            int min = (int) animals[i].getWeight();
             int min_i = i;
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[j] < min) {
-                    min = a[j];
+            for (int j = i + 1; j < animals.length; j++) {
+                if (animals[j].getWeight() < min) {
+                    min = (int)animals[j].getWeight();
                     min_i = j;
                 }
             }
             if (i != min_i) {
-                int tmp = a[i];
-                a[i] = a[min_i];
-                a[min_i] = tmp;
+                int tmp = (int)animals[i].getWeight();
+                animals[i].setWeight(animals[min_i].getWeight());
+                animals[min_i].setWeight(tmp);
             }
         }
     }

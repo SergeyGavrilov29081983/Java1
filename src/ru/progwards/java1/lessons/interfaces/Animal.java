@@ -91,7 +91,7 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
         return CompareResult.GREATER;
     }
 
-
-
-
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
 }
