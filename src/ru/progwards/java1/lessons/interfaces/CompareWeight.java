@@ -10,7 +10,6 @@ public interface CompareWeight<T> {
 
 
 
-
     public enum CompareResult {
         LESS, EQUAL, GREATER;
     }

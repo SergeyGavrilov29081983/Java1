@@ -14,11 +14,6 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
         this.weight = weight;
     }
 
-    public static void main(String[] args) {
-        Animal animal = new Cow(1D);
-        System.out.println(animal.getFood1kgPrice());
-    }
-
     public AnimalKind getKind() {
         return AnimalKind.ANIMAL;
     }
@@ -95,6 +90,7 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
     public void sort(Animal[] a) {
 
     }
+
 
 
     public void setWeight(double weight) {
