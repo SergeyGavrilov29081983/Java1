@@ -10,9 +10,11 @@ public final class ArraySort implements CompareWeight<Animal> {
         return null;
     }
 
-    @Override
-    public void sort(Animal[] animals) {
-        Arrays.sort(animals);
+
+
+    public static void sort(Animal[] animals) {
+
+
         /*for (int i = 0; i < animals.length; i++) {
             int min = (int) animals[i].getWeight();
             int min_i = i;
@@ -31,7 +33,9 @@ public final class ArraySort implements CompareWeight<Animal> {
     }
 
     public static void main(String[] args) {
-        ArraySort arraySort = new ArraySort();
+
+
+
     }
 }
 

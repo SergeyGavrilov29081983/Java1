@@ -1,10 +1,14 @@
 package ru.progwards.java1.lessons.interfaces;
 
+import java.util.Arrays;
+
 public interface CompareWeight<T> {
 
     public CompareResult compareWeight(T obj);
 
-    public void sort(T[] a);
+    public static void sort(Animal[] a){
+        Arrays.sort(a);
+    }
 
 
 
