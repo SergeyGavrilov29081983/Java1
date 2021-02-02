@@ -1,13 +1,11 @@
 package ru.progwards.java1.lessons.interfaces;
 
-public final class ArraySort implements CompareWeight<Animal> {
+public class ArraySort implements CompareWeight<Animal> {
 
     @Override
     public CompareResult compareWeight(Animal obj) {
         return null;
     }
-
-
 
     @Override
     public void sort(Animal[] animals) {
