@@ -1,6 +1,5 @@
 package ru.progwards.java1.lessons.interfaces;
 
-import java.util.Arrays;
 
 public interface CompareWeight<T> {
 
