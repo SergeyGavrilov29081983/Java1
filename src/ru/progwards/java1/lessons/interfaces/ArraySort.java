@@ -1,10 +1,19 @@
 package ru.progwards.java1.lessons.interfaces;
 
-public final class ArraySort {
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
-    public static void sort(Animal[] animals) {
+public final class ArraySort implements CompareWeight<Animal> {
 
-        for (int i = 0; i < animals.length; i++) {
+    @Override
+    public CompareResult compareWeight(Animal obj) {
+        return null;
+    }
+
+    @Override
+    public void sort(Animal[] animals) {
+        Arrays.sort(animals);
+        /*for (int i = 0; i < animals.length; i++) {
             int min = (int) animals[i].getWeight();
             int min_i = i;
             for (int j = i + 1; j < animals.length; j++) {
@@ -18,7 +27,7 @@ public final class ArraySort {
                 animals[i].setWeight(animals[min_i].getWeight());
                 animals[min_i].setWeight(tmp);
             }
-        }
+        }*/
     }
 
     public static void main(String[] args) {
