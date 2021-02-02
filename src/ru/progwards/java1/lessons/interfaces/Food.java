@@ -19,5 +19,10 @@ public class Food  implements CompareWeight<Food>{
         return CompareResult.GREATER;
     }
 
+    @Override
+    public void sort(Animal[] a) {
+
+    }
+
 
 }

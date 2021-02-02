@@ -91,6 +91,10 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
         return CompareResult.GREATER;
     }
 
+    @Override
+    public void sort(Animal[] a) {
+
+    }
 
 
     public void setWeight(double weight) {

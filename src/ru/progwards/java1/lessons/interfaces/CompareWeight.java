@@ -6,9 +6,9 @@ public interface CompareWeight<T> {
 
     public CompareResult compareWeight(T obj);
 
-    public static void sort(Animal[] a){
-        Arrays.sort(a);
-    }
+    public void sort(Animal[] a);
+
+
 
 
 
