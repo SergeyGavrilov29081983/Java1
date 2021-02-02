@@ -1,14 +1,16 @@
 package ru.progwards.java1.lessons.interfaces;
 
-        import java.util.Objects;
+import java.util.Objects;
 
-        import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
+import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
+
 
 public class Animal implements FoodCompare, CompareWeight<Animal> {
 
+
     FoodKind foodKind = getFoodKind();
-    private double weight;
     ArraySort sort;
+    private double weight;
 
     public Animal(double weight) {
         this.weight = weight;
@@ -42,6 +44,10 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
 
     public double getWeight() {
         return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public double getFoodCoeff() {
@@ -89,11 +95,5 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
     @Override
     public void sort(Animal[] a) {
 
-    }
-
-
-
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 }

@@ -28,10 +28,5 @@ public final class ArraySort implements CompareWeight<Animal> {
         }
     }
 
-    public static void main(String[] args) {
-
-
-
-    }
 }
 
