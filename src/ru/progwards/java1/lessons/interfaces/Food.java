@@ -20,7 +20,7 @@ public class Food  implements CompareWeight<Food>{
     }
 
     @Override
-    public void sort(Animal[] a) {
+    public void sort(Food[] a) {
 
 
     }

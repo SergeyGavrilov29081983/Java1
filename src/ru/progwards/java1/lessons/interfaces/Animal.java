@@ -1,8 +1,8 @@
 package ru.progwards.java1.lessons.interfaces;
 
-import java.util.Objects;
+        import java.util.Objects;
 
-import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
+        import static ru.progwards.java1.lessons.interfaces.FoodKind.UNKNOWN;
 
 public class Animal implements FoodCompare, CompareWeight<Animal> {
 

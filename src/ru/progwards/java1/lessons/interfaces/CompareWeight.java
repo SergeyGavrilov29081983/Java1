@@ -5,7 +5,7 @@ public interface CompareWeight<T> {
 
     public CompareResult compareWeight(T obj);
 
-    public void sort(Animal[] a);
+    public void sort(T[] a);
 
 
 
