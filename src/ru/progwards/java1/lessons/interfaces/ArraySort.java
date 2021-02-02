@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.interfaces;
 
-import java.lang.reflect.Array;
+
 import java.util.Arrays;
 
 public final class ArraySort implements CompareWeight<Animal> {
