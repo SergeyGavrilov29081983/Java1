@@ -12,10 +12,10 @@ public final class ArraySort implements CompareWeight<Animal> {
 
 
 
-    public static void sort(Animal[] animals) {
+   /* public static void sort(Animal[] animals) {
 
 
-        /*for (int i = 0; i < animals.length; i++) {
+        for (int i = 0; i < animals.length; i++) {
             int min = (int) animals[i].getWeight();
             int min_i = i;
             for (int j = i + 1; j < animals.length; j++) {
@@ -29,8 +29,8 @@ public final class ArraySort implements CompareWeight<Animal> {
                 animals[i].setWeight(animals[min_i].getWeight());
                 animals[min_i].setWeight(tmp);
             }
-        }*/
-    }
+        }
+    }*/
 
     public static void main(String[] args) {
 
