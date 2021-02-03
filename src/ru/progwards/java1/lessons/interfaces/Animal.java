@@ -91,4 +91,6 @@ public class Animal implements FoodCompare, CompareWeight<Animal> {
         if (this.weight == animal.weight) return CompareResult.EQUAL;
         return CompareResult.GREATER;
     }
+
+
 }
