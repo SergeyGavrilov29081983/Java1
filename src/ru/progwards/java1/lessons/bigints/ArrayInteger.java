@@ -17,7 +17,7 @@ public class ArrayInteger {
 
     public void fromInt(BigInteger value) {
         int val = value.intValue();
-        for (int i = 0; i < digits.length; i++) {
+        for (int i = 0; i < digits.length -1; i++) {
             digits[i] = (byte) (val % 10);
             val = val / 10;
         }
