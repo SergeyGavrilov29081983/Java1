@@ -13,7 +13,7 @@ public class BigAlgebra {
     }
 
     public BigDecimal fastPow(BigDecimal num, int pow) {
-        BigDecimal res = new BigDecimal(String.valueOf(BigDecimal.ONE));
+        BigDecimal res = new BigDecimal("1");
         while (pow > 0) {
             if ((pow & 1) == 1) {
                 res = res.multiply(num);
@@ -26,8 +26,8 @@ public class BigAlgebra {
 
     public BigInteger fibonacci(int n) {
         BigInteger first;
-        BigInteger next = new BigInteger(String.valueOf(1));
-        BigInteger current = new BigInteger(String.valueOf(0));
+        BigInteger next = new BigInteger("1");
+        BigInteger current = new BigInteger("0");
         for (int i = 0; i < n; i++) {
             first = next;
             next = current;
