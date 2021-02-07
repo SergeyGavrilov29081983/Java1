@@ -17,7 +17,7 @@ public class ArrayInteger {
 
     public void fromInt(BigInteger value) {
         int val = value.intValue();
-        for (int i = 0; i < digits.length -1; i++) {
+        for (int i = 0; i < digits.length; i++) {
             digits[i] = (byte) (val % 10);
             val = val / 10;
         }
@@ -34,8 +34,7 @@ public class ArrayInteger {
 
     public boolean add(ArrayInteger num) {
         byte[] tmp = this.digits;
-
-        for (int i = 0; i < tmp.length; i++) {
+        for (int i = 0; i < tmp.length - 1; i++) {
             if (tmp[i] + num.getDigits()[i] >= 10) {
                 tmp[i] = 0;
                 tmp[i + 1] = (byte) (tmp[i + 1] + 1);
