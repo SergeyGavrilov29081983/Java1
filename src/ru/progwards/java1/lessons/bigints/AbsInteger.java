@@ -14,4 +14,9 @@ return null;
                 "integer=" + integer +
                 '}';
     }
+
+    public static void main(String[] args) {
+        ByteInteger integer = new ByteInteger((byte) 10);
+        System.out.println(integer.toString());
+    }
 }
