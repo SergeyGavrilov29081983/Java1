@@ -48,4 +48,13 @@ public class ArrayInteger {
             return true;
         }
     }
+
+    public static void main(String[] args) {
+        ArrayInteger arrayInteger = new ArrayInteger(2);
+        ArrayInteger arrayInteger1 = new ArrayInteger(2);
+        arrayInteger.fromInt(new BigInteger("12"));
+        arrayInteger1.fromInt(new BigInteger("23"));
+        arrayInteger.add(arrayInteger1);
+        System.out.println(Arrays.toString(arrayInteger.getDigits()));
+    }
 }
