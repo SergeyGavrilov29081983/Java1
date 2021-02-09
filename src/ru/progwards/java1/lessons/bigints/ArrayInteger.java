@@ -45,11 +45,11 @@ public class ArrayInteger {
         return new BigInteger(result.toString());
     }
 
-    public boolean add(ArrayInteger num) {
+  /*  public boolean add(ArrayInteger num) {
         if (num.getDigits().length > this.digits.length) {
             Arrays.fill(this.digits, (byte) 0);
             return false;
-        }
+        }*/
 
           /*  int[] r = new int[Math.max(arr1.length, arr2.length)];
             for (int i = 0; i < r.length; i++) {
@@ -63,7 +63,7 @@ public class ArrayInteger {
                     + (i < num.getDigits().length ? num.getDigits()[i] : 0);
         }*/
 
-        byte[] tmp = new byte[this.digits.length];
+       /* byte[] tmp = new byte[this.digits.length];
         for (int i = num.getDigits().length - 1; i >= 0; i--) {
             tmp[i] = num.getDigits()[i];
         }
@@ -78,4 +78,30 @@ public class ArrayInteger {
         }
         return true;
     }
+}*/
+
+    public boolean add(ArrayInteger num) {
+        if (num.getDigits().length > this.digits.length) {
+            Arrays.fill(this.digits, (byte) 0);
+            return false;
+        }
+
+        byte[] tmp = new byte[this.digits.length];
+        for (int i = num.getDigits().length - 1; i >= 0; i--) {
+            tmp[i] = num.getDigits()[i];
+        }
+
+        for (int i = 0; i < this.digits.length; i++) {
+            if (this.digits[i] + tmp[i] >= 10) {
+                this.digits[i] = 0;
+                this.digits[i + 1] = (byte) (this.digits[i + 1] + 1);
+            }
+
+            this.digits[i] = (byte) (this.digits[i] + tmp[i]);
+        }
+        return true;
+    }
 }
+
+
+
