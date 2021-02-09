@@ -20,8 +20,8 @@ public class ArrayInteger {
 
         ai1.add(ai2);
         BigInteger integ = ai1.toInt();
-        //15965781
-        System.out.println(Arrays.toString(ai1.getDigits()));
+        //1 5 9 6 5 7 8 1
+        System.out.println(integ.intValue());
     }
 
     public byte[] getDigits() {
@@ -63,10 +63,10 @@ public class ArrayInteger {
                     + (i < num.getDigits().length ? num.getDigits()[i] : 0);
         }*/
 
-       byte[] tmp = new byte[this.digits.length];
-        for (int i = num.getDigits().length - 1; i >= 0; i--){
-           tmp[i] = num.getDigits()[i];
-       }
+        byte[] tmp = new byte[this.digits.length];
+        for (int i = num.getDigits().length - 1; i >= 0; i--) {
+            tmp[i] = num.getDigits()[i];
+        }
 
         for (int i = 0; i < this.digits.length; i++) {
 
