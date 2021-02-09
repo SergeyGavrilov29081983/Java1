@@ -11,6 +11,19 @@ public class ArrayInteger {
         this.digits = new byte[n];
     }
 
+    public static void main(String[] args) {
+        ArrayInteger ai1 = new ArrayInteger(8);
+        ai1.fromInt(new BigInteger("15947106"));
+
+        ArrayInteger ai2 = new ArrayInteger(5);
+        ai2.fromInt(new BigInteger("18675"));
+
+        ai1.add(ai2);
+        BigInteger integ = ai1.toInt();
+        //15965781
+        System.out.println(Arrays.toString(ai1.getDigits()));
+    }
+
     public byte[] getDigits() {
         return digits;
     }
@@ -33,26 +46,36 @@ public class ArrayInteger {
     }
 
     public boolean add(ArrayInteger num) {
-        if (num.getDigits().length > this.digits.length || num.getDigits().length < this.digits.length) {
+        if (num.getDigits().length > this.digits.length) {
             Arrays.fill(this.digits, (byte) 0);
-        return false;
+            return false;
         }
-        for (int i = 0; i < this.digits.length - 1; i++) {
-            if (this.digits[i] + num.getDigits()[i] >= 10) {
+
+          /*  int[] r = new int[Math.max(arr1.length, arr2.length)];
+            for (int i = 0; i < r.length; i++) {
+                r[i] = (i < arr1.length ? arr1[i] : 0) + (i < arr2.length ? arr2[i] : 0);
+
+        }*/
+
+       /* int[] tmp = new int[this.digits.length];
+        for (int i = 0; i < tmp.length; i++) {
+            tmp[i] = (i < this.digits.length ? this.digits[i] : 0)
+                    + (i < num.getDigits().length ? num.getDigits()[i] : 0);
+        }*/
+
+       byte[] tmp = new byte[this.digits.length];
+        for (int i = num.getDigits().length - 1; i >= 0; i--){
+           tmp[i] = num.getDigits()[i];
+       }
+
+        for (int i = 0; i < this.digits.length; i++) {
+
+            if (this.digits[i] + tmp[i] >= 10) {
                 this.digits[i] = 0;
                 this.digits[i + 1] = (byte) (this.digits[i + 1] + 1);
             }
-            this.digits[i] = (byte) (this.digits[i] + num.getDigits()[i]);
+            this.digits[i] = (byte) (this.digits[i] + tmp[i]);
         }
-           return true;
-    }
-
-    public static void main(String[] args) {
-        ArrayInteger arrayInteger = new ArrayInteger(5);
-        ArrayInteger arrayInteger1 = new ArrayInteger(2);
-        arrayInteger.fromInt(new BigInteger("12345"));
-        arrayInteger1.fromInt(new BigInteger("23"));
-        arrayInteger.add(arrayInteger1);
-        System.out.println(Arrays.toString(arrayInteger.getDigits()));
+        return true;
     }
 }
