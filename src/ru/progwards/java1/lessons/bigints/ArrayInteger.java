@@ -33,7 +33,7 @@ public class ArrayInteger {
     }
 
     public boolean add(ArrayInteger num) {
-        if (num.getDigits().length > this.digits.length) {
+        if (num.getDigits().length > this.digits.length || num.getDigits().length < this.digits.length) {
             Arrays.fill(this.digits, (byte) 0);
         return false;
         }
