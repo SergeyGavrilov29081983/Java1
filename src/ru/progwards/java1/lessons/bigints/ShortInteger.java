@@ -22,8 +22,4 @@ public class ShortInteger extends AbsInteger {
     public Short getInteger() {
         return integer;
     }
-
-    public void setInteger(Short integer) {
-        this.integer = integer;
-    }
 }

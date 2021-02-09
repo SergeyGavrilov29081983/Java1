@@ -16,15 +16,6 @@ public class AbsInteger {
         return new IntInteger(sum);
     }
 
-
-    public static void main(String[] args) {
-
-        AbsInteger t = add(new ShortInteger((short) 12345), new IntInteger(8));
-        System.out.println(t.getClass());
-        System.out.println(sum);
-
-    }
-
     public IntInteger toIntObj() {
         return new IntInteger(this.integer);
     }

@@ -17,12 +17,8 @@ public class IntInteger extends AbsInteger {
         return integer;
     }
 
-    public void setInteger(Integer integer) {
-        this.integer = integer;
-    }
-
     @Override
     public IntInteger toIntObj() {
-        return new IntInteger((int)this.getInteger());
+        return new IntInteger(this.getInteger());
     }
 }

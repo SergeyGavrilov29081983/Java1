@@ -4,7 +4,7 @@ public class ByteInteger extends AbsInteger {
 
     private byte integer;
 
-    public ByteInteger(byte integer){
+    public ByteInteger(byte integer) {
         this.integer = integer;
     }
 
@@ -19,10 +19,7 @@ public class ByteInteger extends AbsInteger {
 
     @Override
     public IntInteger toIntObj() {
-        return new IntInteger((int)this.getInteger());
+        return new IntInteger((int) this.getInteger());
     }
 
-    public void setInteger(byte integer) {
-        this.integer = integer;
-    }
 }
