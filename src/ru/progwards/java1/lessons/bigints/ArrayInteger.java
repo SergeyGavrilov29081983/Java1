@@ -11,6 +11,21 @@ public class ArrayInteger {
         this.digits = new byte[n];
     }
 
+    public static void main(String[] args) {
+        ArrayInteger ai1 = new ArrayInteger(8);
+        ai1.fromInt(new BigInteger("15947106"));
+
+        ArrayInteger ai2 = new ArrayInteger(5);
+        ai2.fromInt(new BigInteger("18675"));
+
+        ai1.add(ai2);
+        BigInteger integ = ai1.toInt();
+        //1 5 9 6 5 7 8 1
+        System.out.println(integ.intValue());
+
+        byte digit = 15 % 10;
+        System.out.println(digit);
+    }
 
     public byte[] getDigits() {
         return digits;
@@ -49,9 +64,7 @@ public class ArrayInteger {
             if (this.digits[i] + tmp[i] < 10) {
                 result[i] = (byte) (this.digits[i] + tmp[i]);
             } else {
-                int digit = this.digits[i] + tmp[i];
-                digit = (byte) (digit % 10);
-                result[i] = (byte) digit;
+                result[i] = (byte) ((this.digits[i] + tmp[i]) %10);
                 this.digits[i + 1] = (byte) (this.digits[i + 1] + 1);
             }
         }
