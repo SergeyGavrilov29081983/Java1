@@ -22,24 +22,24 @@ public class Coder {
     в файл с именем logName вывести название ошибки через метод класса Exception - getMessage()
 */
 
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
-        FileReader reader = new FileReader(inFileName);
-        FileWriter writer = new FileWriter(outFileName);
-
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
         try {
-            for (int ch; (ch = reader.read()) >= 0; ) {
-                for (char c : code) {
-                    if (ch == (int) c) {
-                        writer.write(ch);
+            FileReader reader = new FileReader(inFileName);
+            FileWriter writer = new FileWriter(outFileName);
+            try {
+                for (int ch; (ch = reader.read()) >= 0; ) {
+                    for (char c : code) {
+                        if (ch == (int) c) {
+                            writer.write(ch);
+                        }
                     }
                 }
+            }  finally {
+                reader.close();
+                writer.close();
             }
         } catch (Exception ex) {
-            writer = new FileWriter(logName);
-            writer.write(ex.getMessage());
-        } finally {
-            reader.close();
-            writer.close();
+
         }
     }
 }
