@@ -41,6 +41,7 @@ public class Coder {
         try {
             FileWriter writer = new FileWriter(logName);
             writer.write(message);
+            writer.close();
         } catch (Exception ignored) {
         }
 
@@ -54,6 +55,8 @@ public class Coder {
                 code[i] = (char) (i + 16);
 
             codeFile("in.txt", "out.txt", code, "log.txt");
+        codeFile("inin.txt", "out.txt", code, "log.txt");
+
     }
 }
 
