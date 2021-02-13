@@ -1,5 +1,9 @@
 package ru.progwards.java1.lessons.io1;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Coder {
 /*
 
@@ -17,8 +21,24 @@ public class Coder {
     в файл с именем logName вывести название ошибки через метод класса Exception - getMessage()
 */
 
-public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
+        FileReader reader = new FileReader(inFileName);
+        FileWriter writer = new FileWriter(outFileName);
 
-    
+        try {
+            for (int ch; (ch = reader.read()) >= 0; ) {
+                for (char c : code) {
+                    if (ch == (int) c) {
+                        writer.write(ch);
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            writer.write(ex.getMessage());
+        } finally {
+            reader.close();
+            writer.close();
+        }
+    }
 }
-}
+

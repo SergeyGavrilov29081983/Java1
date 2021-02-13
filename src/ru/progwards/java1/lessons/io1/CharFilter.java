@@ -3,7 +3,6 @@ package ru.progwards.java1.lessons.io1;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class CharFilter {
 
@@ -23,25 +22,20 @@ public class CharFilter {
     public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
         FileReader reader = new FileReader(inFileName);
         FileWriter writer = new FileWriter(outFileName);
-        Scanner scanner = new Scanner(reader);
-        StringBuilder builder = new StringBuilder();
-
-        if (filter.contains("-")) {
-            filter = "[" + "\\-" + filter + "]";
-        } else {
-            filter = "[" + filter + "]";
-        }
-        StringBuilder regexFilter = new StringBuilder(filter);
+        char[] charFilter = filter.toCharArray();
+        char tmp = 0;
 
         try {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                builder.append(line);
+            for (int ch; (ch = reader.read()) >= 0; ) {
+                for (char c : charFilter) {
+                    if (ch == (int) c) {
+                        writer.write(ch);
+                    }
+
+                }
+
             }
 
-            String result = builder.toString();
-            result = result.replaceAll(regexFilter.toString(), "");
-            writer.write(result);
 
         } finally {
             try {
