@@ -3,6 +3,7 @@ package ru.progwards.java1.lessons.io1;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.WriteAbortedException;
 
 public class Coder {
 /*
@@ -34,6 +35,7 @@ public class Coder {
                 }
             }
         } catch (Exception ex) {
+            writer = new FileWriter(logName);
             writer.write(ex.getMessage());
         } finally {
             reader.close();
