@@ -21,7 +21,7 @@ public class Coder {
     в файл с именем logName вывести название ошибки через метод класса Exception - getMessage()
 */
 
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
 
             try {
                 FileReader reader = new FileReader(inFileName);
@@ -35,8 +35,17 @@ public class Coder {
                     writer.close();
                 }
             } catch (Exception ex) {
-                    FileWriter fileWriter = new FileWriter(logName);
+                FileWriter fileWriter = null;
+                try {
+                    fileWriter = new FileWriter(logName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
                     fileWriter.write(ex.getMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
