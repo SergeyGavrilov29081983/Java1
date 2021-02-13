@@ -33,7 +33,7 @@ public class Coder {
                     }
                 }
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             writer.write(ex.getMessage());
         } finally {
             reader.close();
