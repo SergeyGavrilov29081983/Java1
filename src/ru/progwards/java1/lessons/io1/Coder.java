@@ -2,6 +2,7 @@ package ru.progwards.java1.lessons.io1;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Arrays;
 
 public class Coder {
 /*
@@ -21,12 +22,18 @@ public class Coder {
 */
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
+
         String message = null;
         try {
             FileReader reader = new FileReader(inFileName);
             FileWriter writer = new FileWriter(outFileName);
-            for (int ch; (ch = reader.read()) >= 0; ) {
-                writer.write(code[ch]);
+            try {
+                for (int ch; (ch = reader.read()) >= 0; ) {
+                    writer.write(code[ch]);
+                }
+            }finally {
+                reader.close();
+                writer.close();
             }
         } catch (Exception ex) {
             message = ex.getMessage();
@@ -34,14 +41,19 @@ public class Coder {
         try {
             FileWriter writer = new FileWriter(logName);
             writer.write(message);
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
 
     }
 
 
     public static void main(String[] args) {
+            char[] code = new char[256];
+            Arrays.fill(code, '*');
+            for (int i = 48; i < 58; i++)
+                code[i] = (char) (i + 16);
 
+            codeFile("in.txt", "out.txt", code, "log.txt");
     }
 }
 
