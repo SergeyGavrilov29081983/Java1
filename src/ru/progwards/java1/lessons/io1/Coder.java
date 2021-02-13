@@ -3,7 +3,6 @@ package ru.progwards.java1.lessons.io1;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.WriteAbortedException;
 
 public class Coder {
 /*
@@ -22,25 +21,25 @@ public class Coder {
     в файл с именем logName вывести название ошибки через метод класса Exception - getMessage()
 */
 
-    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
-        try {
-            FileReader reader = new FileReader(inFileName);
-            FileWriter writer = new FileWriter(outFileName);
-            try {
-                for (int ch; (ch = reader.read()) >= 0; ) {
-                       writer.write(code[ch]);
-                }
-            }  finally {
-                reader.close();
-                writer.close();
-            }
-        } catch (Exception ex) {
-            try{
-                FileWriter writer = new FileWriter(logName);
-            }catch (Exception ignored){}
+    public static void codeFile(String inFileName, String outFileName, char[] code, String logName) throws IOException {
 
+            try {
+                FileReader reader = new FileReader(inFileName);
+                FileWriter writer = new FileWriter(outFileName);
+                try {
+                    for (int ch; (ch = reader.read()) >= 0; ) {
+                        writer.write(code[ch]);
+                    }
+                } finally {
+                    reader.close();
+                    writer.close();
+                }
+            } catch (Exception ex) {
+                    FileWriter fileWriter = new FileWriter(logName);
+                    fileWriter.write(ex.getMessage());
+            }
         }
-    }
+
 
     public static void main(String[] args) {
 
