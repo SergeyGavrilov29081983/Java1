@@ -28,19 +28,22 @@ public class Coder {
             FileWriter writer = new FileWriter(outFileName);
             try {
                 for (int ch; (ch = reader.read()) >= 0; ) {
-                    for (char c : code) {
-                        if (ch == (int) c) {
-                            writer.write(ch);
-                        }
-                    }
+                       writer.write(code[ch]);
                 }
             }  finally {
                 reader.close();
                 writer.close();
             }
         } catch (Exception ex) {
+            try{
+                FileWriter writer = new FileWriter(logName);
+            }catch (Exception ignored){}
 
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
 
