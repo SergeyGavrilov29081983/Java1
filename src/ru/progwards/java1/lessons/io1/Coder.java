@@ -2,7 +2,6 @@ package ru.progwards.java1.lessons.io1;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class Coder {
 /*
@@ -22,32 +21,23 @@ public class Coder {
 */
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
-
-            try {
-                FileReader reader = new FileReader(inFileName);
-                FileWriter writer = new FileWriter(outFileName);
-                try {
-                    for (int ch; (ch = reader.read()) >= 0; ) {
-                        writer.write(code[ch]);
-                    }
-                } finally {
-                    reader.close();
-                    writer.close();
-                }
-            } catch (Exception ex) {
-                FileWriter fileWriter = null;
-                try {
-                    fileWriter = new FileWriter(logName);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fileWriter.write(ex.getMessage());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        String message = null;
+        try {
+            FileReader reader = new FileReader(inFileName);
+            FileWriter writer = new FileWriter(outFileName);
+            for (int ch; (ch = reader.read()) >= 0; ) {
+                writer.write(code[ch]);
             }
+        } catch (Exception ex) {
+            message = ex.getMessage();
         }
+        try {
+            FileWriter writer = new FileWriter(logName);
+            writer.write(message);
+        } catch (Exception ex) {
+        }
+
+    }
 
 
     public static void main(String[] args) {
