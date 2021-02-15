@@ -3,40 +3,29 @@ package ru.progwards.java1.lessons.io1;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class CharFilter {
 
-//    адача 3. Класс CharFilter
-//    Создать статический метод public static void filterFile(String inFileName, String outFileName, String filter),
-//    в котором прочитать файл inFileName и удалить символы, содержащиеся в String filter, результат записать в выходной файл.
-//    В случае возникновения ошибки, пробросить стандартное исключение выше, корректно закрыв все ресурсы
-//
-//    Например файл содержит:
-//    Java — строго типизированный объектно-ориентированный язык программирования,
-//    разработанный компанией Sun Microsystems (в последующем приобретённой компанией Oracle).
-//    obscene = " -,.()"
-//    Должен выдать результат:
-//    Javaстроготипизированныйобъектноориентированныйязыкпрограммированияразработанныйкомпанией
-//            SunMicrosystemsвпоследующемприобретённойкомпаниейOracle
-
     public static void filterFile(String inFileName, String outFileName, String filter) throws IOException {
         FileReader reader = new FileReader(inFileName);
+        Scanner scanner = new Scanner(reader);
         FileWriter writer = new FileWriter(outFileName);
         char[] charFilter = filter.toCharArray();
-        char tmp = 0;
+
+
+
 
         try {
-            for (int ch; (ch = reader.read()) >= 0; ) {
-                for (char c : charFilter) {
-                    if (ch == (int) c) {
-                        writer.write(ch);
+            while (scanner.hasNextLine()) {
+                String content = scanner.nextLine();
+                for (int i = 0; i < content.length(); i++) {
+                    char tmp = content.charAt(i);
+                        if (filter.indexOf(tmp) == -1) {
+                            writer.write(tmp);
                     }
-
                 }
-
             }
-
-
         } finally {
             try {
                 reader.close();

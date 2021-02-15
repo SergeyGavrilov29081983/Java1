@@ -22,7 +22,6 @@ public class Coder {
 */
 
     public static void codeFile(String inFileName, String outFileName, char[] code, String logName) {
-
         String message = null;
         try {
             FileReader reader = new FileReader(inFileName);
