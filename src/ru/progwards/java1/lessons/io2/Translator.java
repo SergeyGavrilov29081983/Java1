@@ -30,13 +30,15 @@ public class Translator {
     }
 
     public String translate(String sentence) {
+        StringBuilder builder = new StringBuilder();
         String[] strings = sentence.split("[ \n\t\r.,;:!?(){]");
      for (int i = 0; i < strings.length; i++) {
       String tmp = strings[i];
       if (inLang[i] == tmp) {
        tmp = outLang[i];
+       builder.append(tmp);
       }
      }
-        return Arrays.toString(outLang);
+        return builder.toString();
     }
 }
