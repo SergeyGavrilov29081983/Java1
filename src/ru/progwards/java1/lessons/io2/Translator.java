@@ -1,5 +1,7 @@
 package ru.progwards.java1.lessons.io2;
 
+import java.util.Arrays;
+
 public class Translator {
 
  /*   Задача 2. Класс Translator
@@ -18,4 +20,23 @@ public class Translator {
     Например, фраза
 "Hello World!" будет переведена как "Привет Мир!"
     при наличии слов "hello", "world" в inLang и "привет", "мир" в outLang*/
+
+    private String[] inLang;
+    private String[] outLang;
+
+    public Translator(String[] inLang, String[] outLang) {
+        this.inLang = inLang;
+        this.outLang = outLang;
+    }
+
+    public String translate(String sentence) {
+        String[] strings = sentence.split("[ \n\t\r.,;:!?(){]");
+     for (int i = 0; i < strings.length; i++) {
+      String tmp = strings[i];
+      if (inLang[i] == tmp) {
+       tmp = outLang[i];
+      }
+     }
+        return Arrays.toString(outLang);
+    }
 }
