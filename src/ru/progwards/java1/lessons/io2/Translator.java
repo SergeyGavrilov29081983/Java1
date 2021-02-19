@@ -1,7 +1,5 @@
 package ru.progwards.java1.lessons.io2;
 
-import java.util.Arrays;
-
 public class Translator {
 
  /*   Задача 2. Класс Translator
@@ -25,20 +23,44 @@ public class Translator {
     private String[] outLang;
 
     public Translator(String[] inLang, String[] outLang) {
+        this.inLang = new String[inLang.length];
+        System.arraycopy(inLang, 0, this.inLang, 0, inLang.length);
+        this.outLang = new String[outLang.length];
+        System.arraycopy(inLang, 0, this.outLang, 0, outLang.length);
         this.inLang = inLang;
         this.outLang = outLang;
     }
 
+    public static void main(String[] args) {
+
+       /* ERROR: Тест "Конструктор Translator(String[] inLang, String[] outLang)"
+        не пройден. Метод возвращает неверное значение.
+        Экземпляр Translator был создан с параметрами: new String[]{"make", "love", "not", "war"}
+        и new String[]{"твори", "любовь", "не", "войну"}. Метод был вызван с параметром: "make love not war".
+                Возвращено: "", ожидалось: "твори любовь не войну".
+*/
+        Translator translator = new Translator(
+                new String[]{"make", "love", "not", "war"},
+                new String[]{"твори", "любовь", "не", "войну"});
+        System.out.println(translator.translate("make love not war"));
+    }
+
     public String translate(String sentence) {
         StringBuilder builder = new StringBuilder();
-        String[] strings = sentence.split("[ \n\t\r.,;:!?(){]");
-     for (int i = 0; i < strings.length; i++) {
-      String tmp = strings[i];
-      if (inLang[i] == tmp) {
-       tmp = outLang[i];
-       builder.append(tmp);
-      }
-     }
-        return builder.toString();
+        String[] strings = sentence.split("\\s+|(?=[,.])");  //"[ \n\t\r.,;:!?(){]"
+        for (int i = 0; i < strings.length; i++) {
+            String tmp = strings[i];
+            if (inLang[i].equalsIgnoreCase(tmp)) {
+                tmp = outLang[i];
+                    if(Character.isUpperCase(strings[i].charAt(0))){
+                        builder.append(tmp.substring(0, 1).toUpperCase()).append(tmp.substring(1));
+                    } else {
+                        builder.append(tmp);
+                    }
+                }
+                builder.append(" ");
+            }
+return builder.toString();
+
     }
 }
