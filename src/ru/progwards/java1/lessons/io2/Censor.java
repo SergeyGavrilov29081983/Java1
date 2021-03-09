@@ -9,30 +9,30 @@ import java.util.Scanner;
 public class Censor {
 
     private static String censor(String word, String[] obscene) {
-        StringBuilder symbols = new StringBuilder();
-        StringBuilder prew = new StringBuilder();
-        StringBuilder postw = new StringBuilder();
+        String symbols = "";
+        String prew = "";
+        String postw = "";
 
         for (char c : word.toCharArray())
             if (Character.isAlphabetic(c)) {
-                symbols.append(c);
-            } else if ("".equals(symbols.toString())) {
-                prew.append(c);
+                symbols = symbols + c;
+            } else if ("".equals(symbols)) {
+                prew = prew + c;
             } else {
-                postw.append(c);
+                postw = postw + c;
             }
 
-        for (String s : obscene) {
-            if (symbols.toString().equals(s)) {
-                symbols = new StringBuilder();
-                for (int j = 0; j < s.length(); j++) {
-                    symbols.append("*");
+        for (int i = 0; i < obscene.length; i++) {
+            if (symbols.equals(obscene[i])) {
+                symbols = "";
+                for (int j = 0; j < obscene[i].length(); j++) {
+                    symbols = symbols + "*";
                 }
                 break;
             }
         }
 
-        return prew.toString() + symbols + postw;
+        return prew+symbols+postw;
     }
 
 
