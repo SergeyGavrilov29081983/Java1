@@ -38,6 +38,6 @@ public class Translator {
             }
             builder.append(" ");
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
 }

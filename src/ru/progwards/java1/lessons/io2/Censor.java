@@ -1,51 +1,94 @@
 package ru.progwards.java1.lessons.io2;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class Censor {
 
-   /* Задача 3. Класс Censor
-    Создать статический метод public static void censorFile(String inoutFileName, String[] obscene),
-    в котором прочитать файл inoutFileName и заменить слова, содержащиеся в String[] obscene на '*',
-    соответствующие количеству символов в слове, изменения записать в исходный файл. В случае возникновения ошибки,
-    выбросить свое собственное исключение CensorException в котором сохранить - строку, полученную у оригинального exception
-    через метод getMessage() и имя файла, в котором возникла ошибка. В классе перекрыть метод toString(), вернув <имя файла>:<строка
-            ошибки>. Класс CensorException разместить в классе Censor
+    private static String censor(String word, String[] obscene) {
+        StringBuilder symbols = new StringBuilder();
+        StringBuilder prew = new StringBuilder();
+        StringBuilder postw = new StringBuilder();
 
-    Например файл содержит:
-    Java — строго типизированный объектно-ориентированный
-    язык программирования, разработанный компанией Sun Microsystems (в последующем приобретённой компанией Oracle).
-    obscene = {"Java", "Oracle", "Sun", "Microsystems"}
-
-    Должен выдать результат:
-            **** — строго типизированный объектно-ориентированный
-    язык программирования, разработанный компанией *** ************ (в последующем приобретённой компанией ******).*/
-
-    public static void censorFile(String inoutFileName, String[] obscene) {
-
-        try(RandomAccessFile randomAccessFile = new RandomAccessFile(inoutFileName, "rw")){
-            while (randomAccessFile.length() != -1) {
-                String line = randomAccessFile.readLine();
-                line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
-                String[] words = line.split("[ \n\t\r.,;:!?(){]");
-                System.out.println(Arrays.toString(words));
+        for (char c : word.toCharArray())
+            if (Character.isAlphabetic(c)) {
+                symbols.append(c);
+            } else if ("".equals(symbols.toString())) {
+                prew.append(c);
+            } else {
+                postw.append(c);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (String s : obscene) {
+            if (symbols.toString().equals(s)) {
+                symbols = new StringBuilder();
+                for (int j = 0; j < s.length(); j++) {
+                    symbols.append("*");
+                }
+                break;
+            }
         }
 
+        return prew.toString() + symbols + postw;
     }
 
-    public static void main(String[] args) {
-        censorFile("in.txt", new String[5]);
-    }
+
+    public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
+        try {
+
+            try (Scanner scan = new Scanner(inoutFileName)) {
+                RandomAccessFile raf = new RandomAccessFile(inoutFileName, "rw");
+                while (scan.hasNext()) {
+                    String word = scan.next();
+                    String res;
+                    if (word.contains("-")) {
+                        String[] word2 = new String[2];
+                        int ind = word.indexOf("-");
+                        word2[0] = word.substring(0, ind);
+                        word2[1] = word.substring(ind + 1);
+                        res = censor(word2[0], obscene) + "-" + censor(word2[1], obscene);
+                    } else if (word.contains("'")) {
+                        String[] word2 = new String[2];
+                        int ind = word.indexOf("'");
+                        word2[0] = word.substring(0, ind);
+                        word2[1] = word.substring(ind + 1);
+                        res = censor(word2[0], obscene) + "'" + censor(word2[1], obscene);
+                    } else {
+                        res = censor(word, obscene);
+                    }
+
+                    if (scan.hasNext()) {
+                        res = res + " ";
+                    }
+                    raf.write(res.getBytes());
+                }
+                raf.close();
+            } catch (Exception e) {
+                throw new CensorException(e.getMessage(), inoutFileName);
+            }
+        } catch (Exception e) {
+            throw new CensorException(e.getMessage(), inoutFileName);
+        }
     }
 
+    static class CensorException extends Exception {
+        private String message;
+        private String fileName;
+
+        CensorException(String message, String fileName) {
+            super(fileName + ":" + message);
+            this.message = message;
+            this.fileName = fileName;
+
+        }
+
+        @Override
+        public String toString() {
+            return fileName + ":" + message;
+        }
+    }
+}
