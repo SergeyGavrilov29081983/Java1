@@ -1,17 +1,31 @@
 package ru.progwards.java1.lessons.io2;
 
-
-
+import java.io.File;
+import java.io.FileWriter;
 import java.io.RandomAccessFile;
-
 import java.util.Scanner;
 
 public class Censor {
+    static class CensorException extends Exception {
+        String mExc;
+        String fName;
+
+        CensorException(String mExc, String fName) {
+            super(fName+":"+mExc);
+            this.mExc = mExc;
+            this.fName = fName;
+        }
+
+        @Override
+        public String toString() {
+            return fName+":"+mExc;
+        }
+    }
 
     private static String censor(String word, String[] obscene) {
         String symbols = "";
-        String prew = "";
-        String postw = "";
+        String prew = ""; // знаки препинания до слова
+        String postw = ""; // знаки препинания после слова
 
         for (char c : word.toCharArray())
             if (Character.isAlphabetic(c)) {
@@ -35,12 +49,11 @@ public class Censor {
         return prew+symbols+postw;
     }
 
-
     public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
         try {
-
-            try (Scanner scan = new Scanner(inoutFileName)) {
-                RandomAccessFile raf = new RandomAccessFile(inoutFileName, "rw");
+            File fn = new File(inoutFileName);
+            try (Scanner scan = new Scanner(fn)) { // воспринимал строку пути как просто строку %)
+                RandomAccessFile raf = new RandomAccessFile(fn, "rw");
                 while (scan.hasNext()) {
                     String word = scan.next();
                     String res;
@@ -48,13 +61,13 @@ public class Censor {
                         String[] word2 = new String[2];
                         int ind = word.indexOf("-");
                         word2[0] = word.substring(0, ind);
-                        word2[1] = word.substring(ind + 1);
+                        word2[1] = word.substring(ind+1);
                         res = censor(word2[0], obscene) + "-" + censor(word2[1], obscene);
                     } else if (word.contains("'")) {
                         String[] word2 = new String[2];
                         int ind = word.indexOf("'");
                         word2[0] = word.substring(0, ind);
-                        word2[1] = word.substring(ind + 1);
+                        word2[1] = word.substring(ind+1);
                         res = censor(word2[0], obscene) + "'" + censor(word2[1], obscene);
                     } else {
                         res = censor(word, obscene);
@@ -74,20 +87,19 @@ public class Censor {
         }
     }
 
-    static class CensorException extends Exception {
-        private String message;
-        private String fileName;
-
-        CensorException(String message, String fileName) {
-            super(fileName + ":" + message);
-            this.message = message;
-            this.fileName = fileName;
-
+    public static void main(String[] args) {
+        try (FileWriter writer = new FileWriter("D:\\123.txt")) {
+            writer.write("It's a nice day, isn't it? Java супер)");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
-        @Override
-        public String toString() {
-            return fileName + ":" + message;
+        String[] obscene = {"Java", "Oracle", "two", "day"};
+
+        try {
+            censorFile("D:\\123.txt", obscene);
+        } catch (CensorException e) {
+            System.out.println(e.toString());
         }
     }
 }
