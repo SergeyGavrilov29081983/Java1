@@ -1,10 +1,9 @@
 package ru.progwards.java1.lessons.io2;
 
 
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.io.RandomAccessFile;
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class Censor {
