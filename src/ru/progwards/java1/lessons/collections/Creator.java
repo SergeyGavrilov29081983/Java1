@@ -39,8 +39,8 @@ public class Creator {
         for (int i = 0; i < n; i++) {
             j = i * 3;
             collection.add(j);
-            collection.add(j * j);
-            collection.add(j * j * j);
+            collection.add((int)Math.pow(j, 2));
+            collection.add((int)Math.pow(j, 3));
         }
         return collection;
     }
