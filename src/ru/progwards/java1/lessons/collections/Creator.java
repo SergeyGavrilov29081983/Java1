@@ -10,7 +10,7 @@ public class Creator {
 
     public static Collection<Integer> fillEven(int n) {
         Collection<Integer> collection = new ArrayList<>(n);
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i <= n * 2; i++) {
             if (i % 2 == 0) {
                 collection.add(i);
             }
@@ -21,7 +21,7 @@ public class Creator {
 
     public static Collection<Integer> fillOdd(int n) {
         Collection<Integer> collection = new ArrayList<>(n);
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i <= n * 2; i++) {
             if (i % 2 != 0) {
                 collection.add(i);
             }
@@ -56,7 +56,7 @@ public class Creator {
 
 
     public static void main(String[] args) {
-        fillEven(15);
+        fillEven(7);
         fillOdd(15);
     }
 }
