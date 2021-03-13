@@ -1,9 +1,14 @@
 package ru.progwards.java1.lessons.io2;
 
+import org.omg.PortableInterceptor.INACTIVE;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.RandomAccessFile;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.ClientInfoStatus;
+import java.util.*;
 
 public class Censor {
     static class CensorException extends Exception {
@@ -11,14 +16,14 @@ public class Censor {
         String fName;
 
         CensorException(String mExc, String fName) {
-            super(fName+":"+mExc);
+            super(fName + ":" + mExc);
             this.mExc = mExc;
             this.fName = fName;
         }
 
         @Override
         public String toString() {
-            return fName+":"+mExc;
+            return fName + ":" + mExc;
         }
     }
 
@@ -46,7 +51,7 @@ public class Censor {
             }
         }
 
-        return prew+symbols+postw;
+        return prew + symbols + postw;
     }
 
     public static void censorFile(String inoutFileName, String[] obscene) throws CensorException {
@@ -61,13 +66,13 @@ public class Censor {
                         String[] word2 = new String[2];
                         int ind = word.indexOf("-");
                         word2[0] = word.substring(0, ind);
-                        word2[1] = word.substring(ind+1);
+                        word2[1] = word.substring(ind + 1);
                         res = censor(word2[0], obscene) + "-" + censor(word2[1], obscene);
                     } else if (word.contains("'")) {
                         String[] word2 = new String[2];
                         int ind = word.indexOf("'");
                         word2[0] = word.substring(0, ind);
-                        word2[1] = word.substring(ind+1);
+                        word2[1] = word.substring(ind + 1);
                         res = censor(word2[0], obscene) + "'" + censor(word2[1], obscene);
                     } else {
                         res = censor(word, obscene);
@@ -88,6 +93,10 @@ public class Censor {
     }
 
     public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        System.out.println(filter(list));
         try (FileWriter writer = new FileWriter("D:\\123.txt")) {
             writer.write("It's a nice day, isn't it? Java супер)");
         } catch (Exception e) {
@@ -101,5 +110,65 @@ public class Censor {
         } catch (CensorException e) {
             System.out.println(e.toString());
         }
+
+        /*Напишите метод с сигнатурой public List<Integer>
+        listAction(List<Integer> list), который выполняет следующие действия:
+
+        удаляет минимальный элемент коллекции
+        по индексу 0 добавляет число равное количеству элементов
+        по индексу 2 добавляет максимальный элемент из list
+        возвращает list как результат метода
+
+
+        */
+
+
     }
+
+    public void iterator3(ListIterator<Integer> iterator)  {
+        while(iterator.hasNext()) {
+            Integer integer = iterator.next();
+            if(integer % 3 == 0) {
+                iterator.set(iterator.nextIndex());
+            }
+        }
+    }
+
+    public List<Integer> listAction(List<Integer> list) {
+        list.remove(Collections.min(list));
+        list.add(0, list.size());
+        list.add(2, Collections.max(list));
+        return list;
+    }
+
+   /* суммирует значения
+    всех элементов
+    списка
+    удаляет из
+    списка элементы, значение
+    которых больше
+    суммы,
+    деленной на 100(
+    целочисленное деление)
+    возвращает результирующий
+    список
+*/
+    public static List<Integer> filter(List<Integer> list) {
+        int sum = 0;
+        for (Integer el : list) {
+            sum += el;
+        }
+List<Integer> list1 = new ArrayList<>(list);
+        for (Integer el : list1) {
+            if (el > sum / 100) {
+                list.remove(el);
+            }
+
+        }
+
+
+        return list1;
+
+    }
+
 }
