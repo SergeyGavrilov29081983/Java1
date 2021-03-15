@@ -1,8 +1,6 @@
 package ru.progwards.java1.lessons.collections;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Finder {
 
@@ -10,7 +8,7 @@ public class Finder {
         List<Integer> result = new ArrayList<>(numbers);
         List<Integer> indexes = new ArrayList<>();
         int min = result.get(0) + result.get(1);
-        for (int i = 1; i < result.size(); i++) {
+        for (int i = 1; i < result.size() - 1; i++) {
             int tmpSum = result.get(i) + result.get(i + 1);
             if (tmpSum < min) {
                 tmpSum = min;
@@ -27,15 +25,23 @@ public class Finder {
         List<Integer> result = new ArrayList<>(numbers);
         List<Integer> localMax = new ArrayList<>();
         for (int i = 1; i < result.size() - 1; i++) {
-            if (result.get(i) > result.get(i + 1) && result.get(i - 1) > result.get(i - 1)) {
-                localMax.add(i);
+            if (result.get(i) > result.get(i - 1) && result.get(i) > result.get(i + 1)) {
+                localMax.add(result.get(i));
             }
+
+
         }
         return localMax;
     }
 
     public static boolean findSequence(Collection<Integer> numbers) {
-        return numbers.containsAll(new ArrayList<>(numbers));
+        for (int i = 1; i <= numbers.size(); i++) {
+            if (!numbers.contains(i)) {
+                return false;
+            }
+        }
+        return true;
+
     }
 
     public static String findSimilar(Collection<String> names) {
@@ -44,16 +50,18 @@ public class Finder {
         String name = "";
         for (int i = 0; i < result.size(); i++) {
             name = result.get(i);
-            for (String s : result) {
+            for (int i1 = 1; i1 < result.size(); i1++) {
+                String s = result.get(i1);
                 if (name.equals(s)) {
-                    counter = counter + 1;
+                    counter += 1;
                 } else {
                     break;
                 }
             }
-        }
-        return name + ":" + counter;
 
+        }
+
+       return result.get(Collections.frequency(names, name)) + ":" + counter;
     }
 
    /* найдите максимальное количество повторяющихся подряд элементов.
@@ -64,12 +72,23 @@ public class Finder {
 
     public static void main(String[] args) {
         ArrayList names = new ArrayList();
-        names.add("Григорий");
-        names.add("Дмитрий");
-        names.add("Дмитрий");
+
+        names.add("Александр");
         names.add("Александр");
         names.add("Григорий");
         names.add("Григорий");
+        names.add("Дмитрий");
+        names.add("Борис");
+        names.add("Александр");
+        names.add("Александр");
+        names.add("Григорий");
+        names.add("Александр");
+        names.add("Василий");
+
         System.out.println(findSimilar(names));
+        System.out.println(findLocalMax(new ArrayList<Integer>(Arrays.asList(63, -30, -50, -50, 72, 68, 16, 9, 82, 10, -42, 51, 37, 0, -34, -92, 48, 59))));
+        System.out.println(findSequence(new ArrayList<Integer>(Arrays.asList(4, 13, 7, 12, 15, 9, 8, 12, 6, 2, 8, 11, 1, 3, 14, 12))));
+
+        //72,82,51.
     }
 }
