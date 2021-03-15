@@ -23,7 +23,7 @@ public class Finder {
         for (int i = 1; i < result.size() - 1; i++) {
             int tmpSum = result.get(i) + result.get(i + 1);
             if (tmpSum < min) {
-                tmpSum = min;
+                min =  result.get(i) + result.get(i + 1);
             }
             indexes.clear();
             indexes.add(result.get(i));
