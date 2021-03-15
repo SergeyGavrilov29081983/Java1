@@ -4,6 +4,18 @@ import java.util.*;
 
 public class Finder {
 
+
+//    Collection<Integer> res = new ArrayList();
+//    Integer[] nums = new Integer[numbers.size()];
+//        numbers.toArray(nums);
+//    int minSum = nums[0]+nums[1];
+//        for (int i=1; i<nums.length-1; i++) {
+//        if (nums[i]+nums[i+1]<minSum) {
+//            minSum = nums[i]+nums[i+1];
+//            res.clear();
+//            res.add(i);
+//            res.add(i+1);
+
     public static Collection<Integer> findMinSumPair(Collection<Integer> numbers) {
         List<Integer> result = new ArrayList<>(numbers);
         List<Integer> indexes = new ArrayList<>();
@@ -14,8 +26,8 @@ public class Finder {
                 tmpSum = min;
             }
             indexes.clear();
-            indexes.add(i);
-            indexes.add(i + 1);
+            indexes.add(result.get(i));
+            indexes.add(result.get(i + 1));
         }
         return indexes;
     }
@@ -61,7 +73,7 @@ public class Finder {
 
         }
 
-       return result.get(Collections.frequency(names, name)) + ":" + counter;
+        return result.get(Collections.frequency(names, name)) + ":" + counter;
     }
 
    /* найдите максимальное количество повторяющихся подряд элементов.
