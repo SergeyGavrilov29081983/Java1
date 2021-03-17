@@ -4,30 +4,17 @@ import java.util.*;
 
 public class Finder {
 
-
-//    Collection<Integer> res = new ArrayList();
-//    Integer[] nums = new Integer[numbers.size()];
-//        numbers.toArray(nums);
-//    int minSum = nums[0]+nums[1];
-//        for (int i=1; i<nums.length-1; i++) {
-//        if (nums[i]+nums[i+1]<minSum) {
-//            minSum = nums[i]+nums[i+1];
-//            res.clear();
-//            res.add(i);
-//            res.add(i+1);
-
     public static Collection<Integer> findMinSumPair(Collection<Integer> numbers) {
         List<Integer> result = new ArrayList<>(numbers);
         List<Integer> indexes = new ArrayList<>();
         int min = result.get(0) + result.get(1);
         for (int i = 1; i < result.size() - 1; i++) {
-            int tmpSum = result.get(i) + result.get(i + 1);
-            if (tmpSum < min) {
-                min =  result.get(i) + result.get(i + 1);
+            if (result.get(i) + result.get(i + 1) < min) {
+                min = result.get(i) + result.get(i + 1);
+                indexes.clear();
+                indexes.add(i);
+                indexes.add(i + 1);
             }
-            indexes.clear();
-            indexes.add(result.get(i));
-            indexes.add(result.get(i + 1));
         }
         return indexes;
     }
@@ -96,7 +83,7 @@ public class Finder {
         names.add("Григорий");
         names.add("Александр");
         names.add("Василий");
-
+        System.out.println(findMinSumPair(new ArrayList<>(Arrays.asList(45, 45, -24, -40, -2, -75, 3, 80))));
         System.out.println(findSimilar(names));
         System.out.println(findLocalMax(new ArrayList<Integer>(Arrays.asList(63, -30, -50, -50, 72, 68, 16, 9, 82, 10, -42, 51, 37, 0, -34, -92, 48, 59))));
         System.out.println(findSequence(new ArrayList<Integer>(Arrays.asList(4, 13, 7, 12, 15, 9, 8, 12, 6, 2, 8, 11, 1, 3, 14, 12))));
