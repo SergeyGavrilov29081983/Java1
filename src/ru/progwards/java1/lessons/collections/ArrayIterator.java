@@ -19,8 +19,8 @@ public class ArrayIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        pointer++;
-        return array[pointer--];
+        pointer += 1;
+        return array[pointer - 1];
     }
 }
 

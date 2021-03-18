@@ -22,10 +22,10 @@ public class MatrixIterator<T> implements Iterator<T> {
     @Override
     public T next() {
         if (PointerSecond == array[pointerFirst].length) {
-            pointerFirst++;
+            pointerFirst += 1;
             PointerSecond = 0;
         }
         PointerSecond++;
-        return array[pointerFirst][PointerSecond--];
+        return array[pointerFirst][PointerSecond - 1];
     }
 }
