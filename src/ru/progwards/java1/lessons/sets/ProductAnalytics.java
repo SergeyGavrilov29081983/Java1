@@ -1,5 +1,6 @@
 package ru.progwards.java1.lessons.sets;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,12 +16,22 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existInAll() {
-return null;
+        Set<Product> result = new HashSet<>();
+        for (Shop shop : shops) {
+            List<Product> products = shop.getProducts();
+            result.addAll(products);
+        }
+        return result;
         //товары из products, которые имеются во всех магазинах
     }
 
     public Set<Product> existAtListInOne() {
-        return null;
+        Set<Product> result = new HashSet<>();
+        for (Shop shop : shops) {
+            List<Product> products = shop.getProducts();
+            result.addAll(products);
+        }
+        return result;
         //товары из products, которые имеются хотя бы в одном магазине
     }
 
