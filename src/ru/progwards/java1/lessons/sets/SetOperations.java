@@ -22,7 +22,7 @@ public class SetOperations {
     public static Set<Integer> difference(Set<Integer> set1, Set<Integer> set2) {
         TreeSet<Integer> result = new TreeSet<>();
         for (Integer o : set1) {
-            if (!set1.contains(set2)) {
+            if (set2.contains(o)) {
                 result.add(o);
             }
         }
@@ -33,7 +33,7 @@ public class SetOperations {
     public static Set<Integer> symDifference(Set<Integer> set1, Set<Integer> set2) {
         TreeSet<Integer> result = new TreeSet<>();
         for (Integer o : set1) {
-            if (!set2.contains(set1)) {
+            if (set2.contains(o)) {
                 result.add(o);
             }
         }
