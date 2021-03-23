@@ -3,6 +3,7 @@ package ru.progwards.java1.lessons.sets;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class SetOperations {
 
@@ -19,10 +20,10 @@ public class SetOperations {
     }
 
     public static Set<Integer> difference(Set<Integer> set1, Set<Integer> set2) {
-        Set<Integer> result = new HashSet<>();
-        for (Object o : set1) {
+        TreeSet<Integer> result = new TreeSet<>();
+        for (Integer o : set1) {
             if (!set1.contains(set2)) {
-                result.add((Integer) o);
+                result.add(o);
             }
         }
         return result;
@@ -30,10 +31,10 @@ public class SetOperations {
     }
 
     public static Set<Integer> symDifference(Set<Integer> set1, Set<Integer> set2) {
-        Set<Integer> result = new HashSet<>();
-        for (Object o : set1) {
+        TreeSet<Integer> result = new TreeSet<>();
+        for (Integer o : set1) {
             if (!set2.contains(set1)) {
-                result.add((Integer) o);
+                result.add(o);
             }
         }
         return result;
