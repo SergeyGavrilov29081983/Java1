@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.io2;
 
-import org.omg.PortableInterceptor.INACTIVE;
+
 
 import java.io.File;
 import java.io.FileWriter;
