@@ -7,7 +7,6 @@ import java.util.Set;
 public class ProductAnalytics {
 
     private List<Shop> shops;
-
     private List<Product> products;
 
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
@@ -18,11 +17,10 @@ public class ProductAnalytics {
     public Set<Product> existInAll() {
         Set<Product> result = new HashSet<>();
         result.addAll(shops.get(0).getProducts());
-        for (int i = 1; i< shops.size(); i++) {
+        for (int i = 1; i < shops.size(); i++) {
             result.retainAll(shops.get(i).getProducts());
         }
         return result;
-        //товары из products, которые имеются во всех магазинах
     }
 
     public Set<Product> existAtListInOne() {
@@ -32,18 +30,28 @@ public class ProductAnalytics {
             result.addAll(products);
         }
         return result;
-        //товары из products, которые имеются хотя бы в одном магазине
     }
 
-
     public Set<Product> notExistInShops() {
-        return null;
+        Set<Product> result = new HashSet<>();
+        for (Shop shop : shops) {
+            List<Product> products = shop.getProducts();
+            result.addAll(products);
+        }
+        Set<Product> ProductsNotExistsInShops = new HashSet<>();
+        for (Product product : products) {
+            if (!result.contains(product)) {
+                ProductsNotExistsInShops.add(product);
+            }
+        }
+        return ProductsNotExistsInShops;
         //товары из products, которых нет ни в одном магазине
     }
 
 
     public Set<Product> existOnlyInOne() {
         return null;
+
         //товары из products, которые есть только в одном магазине
     }
 }
