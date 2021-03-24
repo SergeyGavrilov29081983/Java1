@@ -56,7 +56,7 @@ public class ProductAnalytics {
         }
         Set<Product> productsExistOnlyOneShop = new HashSet<>();
         for (Product product : products) {
-            if (!result.contains(product)) {
+            if (result.contains(product)) {
                 productsExistOnlyOneShop.add(product);
             }
         }
