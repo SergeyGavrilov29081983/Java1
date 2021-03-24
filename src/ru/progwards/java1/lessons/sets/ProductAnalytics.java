@@ -17,9 +17,9 @@ public class ProductAnalytics {
 
     public Set<Product> existInAll() {
         Set<Product> result = new HashSet<>();
-        for (Shop shop : shops) {
-            List<Product> products = shop.getProducts();
-            result.retainAll(products);
+        result.addAll(shops.get(0).getProducts());
+        for (int i = 1; i< shops.size(); i++) {
+            result.retainAll(shops.get(i).getProducts());
         }
         return result;
         //товары из products, которые имеются во всех магазинах
