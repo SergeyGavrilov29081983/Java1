@@ -19,7 +19,7 @@ public class ProductAnalytics {
         Set<Product> result = new HashSet<>();
         for (Shop shop : shops) {
             List<Product> products = shop.getProducts();
-            result.addAll(products);
+            result.retainAll(products);
         }
         return result;
         //товары из products, которые имеются во всех магазинах
