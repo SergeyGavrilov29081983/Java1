@@ -1,8 +1,9 @@
 package ru.progwards.java1.lessons.sets;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ProductAnalytics {
 
@@ -12,6 +13,20 @@ public class ProductAnalytics {
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
         this.products = products;
         this.shops = shops;
+    }
+
+    public static void main(String[] args) {
+        Shop shop1 = new Shop(Arrays.asList(new Product("art-2"), new Product("art-4"), new Product("art-7"), new Product("art-9")));
+        Shop shop2 = new Shop(Arrays.asList(new Product("art-1"), new Product("art-3"), new Product("art-4"), new Product("art-10")));
+        Shop shop3 = new Shop(Arrays.asList(new Product("art-1"),
+                new Product("art-3"), new Product("art-4"), new Product("art-7"), new Product("art-10")));
+        List<Product> products = new ArrayList<>(Arrays.asList(new Product("art-1"), new Product("art-2"), new Product("art-3"),
+                new Product("art-4"), new Product("art-5"), new Product("art-6"), new Product("art-7"), new Product("art-8"),
+                new Product("art-9"), new Product("art-10")));
+
+        // Ожидалось множество, содержащее:art - 9, art - 2.
+        ProductAnalytics productAnalytics = new ProductAnalytics(products, Arrays.asList(shop1, shop2, shop3));
+        System.out.println(productAnalytics.existOnlyInOne());
     }
 
     public Set<Product> existInAll() {
@@ -47,26 +62,30 @@ public class ProductAnalytics {
         return ProductsNotExistsInShops;
     }
 
-
     public Set<Product> existOnlyInOne() {
-        Set<Product> retainProducts = new HashSet<>(shops.get(0).getProducts());
-        for (int i = 1; i < shops.size(); i++) {
-            retainProducts.retainAll(shops.get(i).getProducts());
+        List<Product> shopProducts = new ArrayList<>();
+        for (Shop shop : shops) {
+            shopProducts.addAll(shop.getProducts());
         }
+        Set<Product> products1 = Stream.of(shopProducts)
+                .flatMap(Collection::stream)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
 
-        Set<Product> productsExistOnlyOneShop = new HashSet<>();
-
-        for (Shop shop: shops) {
-            List<Product> shopProducts = shop.getProducts();
-            for (Product product: shopProducts) {
-                if (!retainProducts.contains(product)) {
-                    productsExistOnlyOneShop.add(product);
-                }
+        Set<Product> unique = new HashSet<>();
+        for (Product product: products) {
+            if (!products1.contains(product)) {
+                unique.add(product);
             }
         }
-        return productsExistOnlyOneShop;
-        //товары из products, которые есть только в одном магазине
+        return unique;
     }
+    //товары из products, которые есть только в одном магазине
+
 }
 
 class Product {
@@ -78,6 +97,13 @@ class Product {
 
     public String getCode() {
         return code;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "code='" + code + '\'' +
+                '}';
     }
 }
 
