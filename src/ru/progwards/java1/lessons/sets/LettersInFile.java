@@ -14,7 +14,7 @@ public class LettersInFile {
         List<String> lines = Files.readAllLines(Paths.get(fileName));
         StringBuilder builder = new StringBuilder();
         for (String str : lines) {
-            builder.append(str.replaceAll("[^\\da-zA-Zа-яёА-ЯЁ ]", ""));
+            builder.append(str.replaceAll("[^a-zA-Zа-яА-Я ]", ""));
         }
         Set<Character> sort = new HashSet<>();
         String result = builder.toString();
