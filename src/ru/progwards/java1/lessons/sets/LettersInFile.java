@@ -11,10 +11,11 @@ import java.util.stream.Stream;
 public class LettersInFile {
 
     public static String process(String fileName) throws IOException {
+
         List<String> lines = Files.readAllLines(Paths.get(fileName));
         StringBuilder builder = new StringBuilder();
         for (String str : lines) {
-            builder.append(str.replaceAll("[^a-zA-Zа-яА-Я]", "").replaceAll("[ЪъЬь]", ""));
+            builder.append(str.replaceAll("[^a-zA-Zа-яА-Я]", ""));
         }
 
         return Stream.of(builder.toString().split("")).sorted().collect(Collectors.joining());
