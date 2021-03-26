@@ -14,9 +14,9 @@ public class LettersInFile {
         List<String> lines = Files.readAllLines(Paths.get(fileName));
         StringBuilder builder = new StringBuilder();
         for (String str : lines) {
-            builder.append(str.replaceAll("[^a-zA-Zа-яА-Я] ЪъЬь", ""));
+            builder.append(str.replaceAll("[^a-zA-Zа-яА-Я]", "").replaceAll("[ЪъЬь]", ""));
         }
-        //builder.append((builder.toString().replaceAll("[ЪъЬь]", "")));
+
         return Stream.of(builder.toString().split("")).sorted().collect(Collectors.joining());
     }
 }
