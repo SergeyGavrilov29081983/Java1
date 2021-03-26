@@ -16,6 +16,7 @@ public class LettersInFile {
         for (String str : lines) {
             builder.append(str.replaceAll("[^a-zA-Zа-яА-Я]", ""));
         }
+        builder.append((builder.toString().replaceAll("[ЪъЬь]", "")));
         return Stream.of(builder.toString().split("")).sorted().collect(Collectors.joining());
     }
 }
