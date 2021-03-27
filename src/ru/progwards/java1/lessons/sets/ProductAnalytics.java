@@ -63,7 +63,7 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
-
+return null;
     }
     //товары из products, которые есть только в одном магазине
 
