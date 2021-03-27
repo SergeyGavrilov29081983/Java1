@@ -1,28 +1,29 @@
 package ru.progwards.java1.lessons.sets;
 
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.io.Reader;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 
 public class LettersInFile {
 
     public static String process(String fileName) throws IOException {
+        TreeSet<Character> charSet = new TreeSet<>();
+        Reader reader = new FileReader(fileName);
+        StringBuilder result = new StringBuilder();
 
-       /* List<String> lines = Files.readAllLines(Paths.get(fileName));
-        StringBuilder builder = new StringBuilder();
-        for (String str : lines) {
-            builder.append(str.replaceAll("[^a-zA-Zа-яА-Я]", ""));
-        }*/
-       return Files.lines(Paths.get(fileName))
-               .map(str -> Arrays.toString(str.replaceAll("[^a-zA-Zа-яА-Я]", "").split("")))
-               .distinct()
-               .sorted()
-               .collect(Collectors.joining());
-        //return Stream.of(builder.toString().split("")).sorted().distinct().collect(Collectors.joining());
+        while (reader.read() != -1) {
+            char character = (char) reader.read();
+            if (Character.isLetter(character)) {
+                charSet.add(character);
+            }
+            Iterator<Character> iterator = charSet.iterator();
+            while (iterator.hasNext()) {
+                result.append(iterator.next());
+            }
+        }
+        return result.toString();
     }
 }

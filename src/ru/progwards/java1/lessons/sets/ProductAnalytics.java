@@ -63,26 +63,7 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
-        List<Product> shopProducts = new ArrayList<>();
-        for (Shop shop : shops) {
-            shopProducts.addAll(shop.getProducts());
-        }
-        Set<Product> products1 = Stream.of(shopProducts)
-                .flatMap(Collection::stream)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet()
-                .stream()
-                .filter(e -> e.getValue() == 1)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toSet());
 
-        Set<Product> unique = new HashSet<>();
-        for (Product product: products) {
-            if (!products1.contains(product)) {
-                unique.add(product);
-            }
-        }
-        return unique;
     }
     //товары из products, которые есть только в одном магазине
 
