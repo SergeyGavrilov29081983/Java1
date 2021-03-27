@@ -60,9 +60,11 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
+
         Set<Product> unique = new HashSet<>();
-        int counter = 0;
+
         for (Product product : products) {
+            int counter = 0;
             for (Shop shop : shops) {
                 for (Product product1 : shop.getProducts()) {
                     if (product1.equals(product)) {
