@@ -13,12 +13,13 @@ public class LettersInFile {
         TreeSet<Character> charSet = new TreeSet<>();
         Reader reader = new FileReader(fileName);
         StringBuilder result = new StringBuilder();
-
-        while (reader.read() != -1) {
-            char character = (char) reader.read();
+        int symbol = reader.read();
+        while (symbol != -1) {
+            char character = (char) symbol;
             if (Character.isLetter(character)) {
                 charSet.add(character);
             }
+            symbol = reader.read();
             Iterator<Character> iterator = charSet.iterator();
             while (iterator.hasNext()) {
                 result.append(iterator.next());
