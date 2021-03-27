@@ -1,9 +1,6 @@
 package ru.progwards.java1.lessons.sets;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ProductAnalytics {
 
@@ -63,9 +60,24 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
-return null;
+        Set<Product> unique = new HashSet<>();
+        int counter = 0;
+        for (Product product : products) {
+            for (Shop shop : shops) {
+                for (Product product1 : shop.getProducts()) {
+                    if (product1.equals(product)) {
+                        counter++;
+                    }
+                }
+            }
+
+        if (counter == 1) {
+            unique.add(product);
+        }
     }
-    //товары из products, которые есть только в одном магазине
+        return unique;
+}
+
 
 }
 

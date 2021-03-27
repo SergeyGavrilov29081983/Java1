@@ -1,30 +1,31 @@
 package ru.progwards.java1.lessons.sets;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.Iterator;
 import java.util.TreeSet;
-
 
 public class LettersInFile {
 
     public static String process(String fileName) throws IOException {
-        TreeSet<Character> charSet = new TreeSet<>();
-        Reader reader = new FileReader(fileName);
-        StringBuilder result = new StringBuilder();
-        int symbol = reader.read();
-        while (symbol != -1) {
-            char character = (char) symbol;
-            if (Character.isLetter(character)) {
-                charSet.add(character);
+        String result = "";
+        TreeSet<Character> res = new TreeSet<>();
+        try (FileInputStream reader = new FileInputStream(fileName)) {
+            InputStreamReader test = new InputStreamReader(reader);
+            int b = test.read();
+            while (b != -1) {
+                char s = (char) b;
+                if (Character.isLetter(s)) {
+                    res.add(s);
+                }
+                b = test.read();
             }
-            symbol = reader.read();
-            Iterator<Character> iterator = charSet.iterator();
-            while (iterator.hasNext()) {
-                result.append(iterator.next());
+            Iterator<Character> it = res.iterator();
+            while (it.hasNext()) {
+                result += it.next();
             }
+        } catch (IOException e) {
+            throw new IOException("что-то пошло не так.. " + e.getMessage());
         }
-        return result.toString();
+        return result;
     }
 }
