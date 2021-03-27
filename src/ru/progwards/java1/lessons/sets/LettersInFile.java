@@ -12,12 +12,16 @@ public class LettersInFile {
 
     public static String process(String fileName) throws IOException {
 
-        List<String> lines = Files.readAllLines(Paths.get(fileName));
+       /* List<String> lines = Files.readAllLines(Paths.get(fileName));
         StringBuilder builder = new StringBuilder();
         for (String str : lines) {
             builder.append(str.replaceAll("[^a-zA-Zа-яА-Я]", ""));
-        }
-
-        return Stream.of(builder.toString().split("")).sorted().collect(Collectors.joining());
+        }*/
+       return Files.lines(Paths.get(fileName))
+               .map(str -> str.replaceAll("[^a-zA-Zа-яА-Я]", ""))
+               .distinct()
+               .sorted()
+               .collect(Collectors.joining());
+        //return Stream.of(builder.toString().split("")).sorted().distinct().collect(Collectors.joining());
     }
 }
