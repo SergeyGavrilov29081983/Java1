@@ -1,6 +1,8 @@
 package ru.progwards.java1.lessons.sets;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ProductAnalytics {
 
@@ -10,20 +12,6 @@ public class ProductAnalytics {
     public ProductAnalytics(List<Product> products, List<Shop> shops) {
         this.products = products;
         this.shops = shops;
-    }
-
-    public static void main(String[] args) {
-        Shop shop1 = new Shop(Arrays.asList(new Product("art-2"), new Product("art-4"), new Product("art-7"), new Product("art-9")));
-        Shop shop2 = new Shop(Arrays.asList(new Product("art-1"), new Product("art-3"), new Product("art-4"), new Product("art-10")));
-        Shop shop3 = new Shop(Arrays.asList(new Product("art-1"),
-                new Product("art-3"), new Product("art-4"), new Product("art-7"), new Product("art-10")));
-        List<Product> products = new ArrayList<>(Arrays.asList(new Product("art-1"), new Product("art-2"), new Product("art-3"),
-                new Product("art-4"), new Product("art-5"), new Product("art-6"), new Product("art-7"), new Product("art-8"),
-                new Product("art-9"), new Product("art-10")));
-
-        // Ожидалось множество, содержащее:art - 9, art - 2.
-        ProductAnalytics productAnalytics = new ProductAnalytics(products, Arrays.asList(shop1, shop2, shop3));
-        System.out.println(productAnalytics.existOnlyInOne());
     }
 
     public Set<Product> existInAll() {
@@ -60,9 +48,7 @@ public class ProductAnalytics {
     }
 
     public Set<Product> existOnlyInOne() {
-
         Set<Product> unique = new HashSet<>();
-
         for (Product product : products) {
             int counter = 0;
             for (Shop shop : shops) {
@@ -72,15 +58,12 @@ public class ProductAnalytics {
                     }
                 }
             }
-
-        if (counter == 1) {
-            unique.add(product);
+            if (counter == 1) {
+                unique.add(product);
+            }
         }
-    }
         return unique;
-}
-
-
+    }
 }
 
 class Product {
