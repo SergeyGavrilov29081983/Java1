@@ -5,16 +5,22 @@ import java.util.*;
 public class CollectionsSort {
 
     public static void mySort(Collection<Integer> data) {
-        List<Integer> result = new ArrayList<>(data);
-        for (int i = 0; i < result.size(); i++) {
-            for (int j = i + 1; j < result.size(); j++) {
-                if (result.get(i) > result.get(j)) {
-                    int a1 = result.get(i);
-                    int a2 = result.get(j);
-                    result.add(i, a1);
-                    result.add(j, a2);
+
+        Integer[] a = new Integer[data.size()];
+        data.toArray(a);
+        for (int i = 0; i < a.length; i++) {
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[i] > a[j]) {
+                    int a1 = a[i];
+                    a[i] = a[j];
+                    a[j] = a1;
                 }
             }
+        }
+        data.clear();
+        //data.addAll(Arrays.asList(a)); // неизменяемый объект
+        for (int i = 0; i < a.length; i++) {
+            data.add(a[i]);
         }
     }
 
