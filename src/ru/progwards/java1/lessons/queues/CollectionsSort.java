@@ -18,33 +18,27 @@ public class CollectionsSort {
             }
         }
         data.clear();
-        //data.addAll(Arrays.asList(a)); // неизменяемый объект
         for (int i = 0; i < a.length; i++) {
             data.add(a[i]);
         }
     }
 
     public static void minSort(Collection<Integer> data) {
-        List<Integer> list = new ArrayList<>(data);
-        List<Integer> result = new ArrayList<>(list.size());
-        int min;
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            min = Collections.min(list);
+
+        List<Integer> result = new ArrayList<>();
+        while(!data.isEmpty()) {
+            int min = Collections.min(data);
             result.add(min);
-            list.remove((Integer) min);
+            data.remove(min);
         }
-        list = new ArrayList<>(data);
-        Collections.copy(list, result);
-
-
-
+        data.addAll(result);
     }
 
 
     public static void collSort(Collection<Integer> data) {
         List<Integer> result = new ArrayList<>(data);
         Collections.sort(result);
+        data.addAll(result);
     }
 
     public static Collection<String> compareSort() {
