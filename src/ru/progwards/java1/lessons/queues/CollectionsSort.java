@@ -24,7 +24,6 @@ public class CollectionsSort {
     }
 
     public static void minSort(Collection<Integer> data) {
-
         List<Integer> result = new ArrayList<>();
         while(!data.isEmpty()) {
             int min = Collections.min(data);
@@ -34,10 +33,10 @@ public class CollectionsSort {
         data.addAll(result);
     }
 
-
     public static void collSort(Collection<Integer> data) {
         List<Integer> result = new ArrayList<>(data);
         Collections.sort(result);
+        data.clear();
         data.addAll(result);
     }
 

@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class OrderQueue {
-    Comparator<Order> comparator = Comparator.comparingDouble(Order::getSum);
+    Comparator<Order> comparator = Comparator.comparingDouble(Order::getSum).reversed();
 
     private PriorityQueue<Order> queue = new PriorityQueue<>(comparator);
 

@@ -8,7 +8,6 @@ public class Order  implements Comparable<Order>{
     private int num;
     private static final AtomicInteger id = new AtomicInteger(0);
 
-
     public Order(double sum) {
 
         this.num = id.incrementAndGet();
