@@ -38,12 +38,12 @@ public class Order implements Comparable<Order> {
             return 1;
         }
 
-       /* if (this.num > o.num) {
+        if (this.num > o.num) {
             return 1;
         }
         if (this.num < o.num) {
             return -1;
-        }*/
+        }
 
         return 0;
     }
