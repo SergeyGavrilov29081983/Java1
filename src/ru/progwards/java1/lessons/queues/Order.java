@@ -1,15 +1,16 @@
 package ru.progwards.java1.lessons.queues;
 
-import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Order  implements Comparable<Order>{
 
     private double sum;
     private int num;
-    private AtomicInteger id = new AtomicInteger(1);
+    private static final AtomicInteger id = new AtomicInteger(0);
+
 
     public Order(double sum) {
+
         this.num = id.incrementAndGet();
         this.sum = sum;
     }
