@@ -18,9 +18,7 @@ public class CollectionsSort {
             }
         }
         data.clear();
-        for (int i = 0; i < a.length; i++) {
-            data.add(a[i]);
-        }
+        data.addAll(Arrays.asList(a));
     }
 
     public static void minSort(Collection<Integer> data) {

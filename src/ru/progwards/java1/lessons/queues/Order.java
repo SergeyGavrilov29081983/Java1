@@ -37,7 +37,6 @@ public class Order implements Comparable<Order> {
         if (this.category < o.category) {
             return 1;
         }
-
         return Integer.compare(this.num, o.num);
     }
 }
