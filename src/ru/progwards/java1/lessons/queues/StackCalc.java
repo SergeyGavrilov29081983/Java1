@@ -36,6 +36,6 @@ public class StackCalc {
     public void div() {
         Double firstNum = stack.pop();
         Double secondNum = stack.pop();
-        stack.push(firstNum / secondNum);
+        stack.push(secondNum / firstNum);
     }
 }
