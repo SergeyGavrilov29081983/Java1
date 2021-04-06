@@ -2,23 +2,26 @@ package ru.progwards.java1.lessons.queues;
 
 import java.util.*;
 
+
 public class CollectionsSort {
 
     public static void mySort(Collection<Integer> data) {
-        List<Integer> list = new ArrayList<>(data);
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i) > list.get(j)) {
-                    int a1 = list.get(i);
-                    int a2 = list.get(j);
-                    list.add(i, a1);
-                    list.add(j, a2);
+        Integer[] result = new Integer[data.size()];
+        data.toArray(result);
+        for (int i = 0; i < result.length; i++) {
+            for (int j = i + 1; j < result.length; j++) {
+                if (result[i] > result[j]) {
+                    int sortedDigit = result[i];
+                    result[i] = result[j];
+                    result[j] = sortedDigit;
                 }
             }
         }
         data.clear();
-        data.addAll(list);
+        data.addAll(Arrays.asList(result));
     }
+
+
 
     public static void minSort(Collection<Integer> data) {
         List<Integer> result = new ArrayList<>();
