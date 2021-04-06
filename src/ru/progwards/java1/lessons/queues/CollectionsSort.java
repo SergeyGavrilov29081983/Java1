@@ -6,19 +6,19 @@ public class CollectionsSort {
 
     public static void mySort(Collection<Integer> data) {
 
-        Integer[] a = new Integer[data.size()];
-        data.toArray(a);
-        for (int i = 0; i < a.length; i++) {
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[i] > a[j]) {
-                    int a1 = a[i];
-                    a[i] = a[j];
-                    a[j] = a1;
+        List<Integer> list = new ArrayList<>(data);
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(i) > list.get(j)) {
+                    int a1 = list.get(i);
+                    int a2 = list.get(j);
+                    list.add(i, a1);
+                    list.add(j, a2);
                 }
             }
         }
         data.clear();
-        data.addAll(Arrays.asList(a));
+        data.addAll(list);
     }
 
     public static void minSort(Collection<Integer> data) {
