@@ -50,7 +50,7 @@ public class CyclesGoldenFibo {
     }
 
     public static void main(String[] args) {
-        int side;
+        /*int side;
         int base;
         for (int i = 1; i < 16; i++) {
             System.out.println(fiboNumber(i));
@@ -61,13 +61,9 @@ public class CyclesGoldenFibo {
                 System.out.println(side);
                 System.out.println(base);
             }
-            for ( ; ; ) {
 
-
-
-            }
-
-        }
+        }*/
+        System.out.println(fiboNumber(10));
     }
 
     static int addAsStrings(int n1, int n2) {
