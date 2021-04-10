@@ -44,10 +44,12 @@ public class UsageFrequency {
         for (String str : content) {
             String[] words = str.split(" ");
             for (String key : words) {
-                if (result.containsKey(key)) {
-                    result.merge(key, result.get(key), (o, n) -> o + 1);
-                } else {
-                    result.put(key, 1);
+                if (Character.isLetter(key.charAt(0)) || Character.isDigit(key.charAt(0))) {
+                    if (result.containsKey(key)) {
+                        result.merge(key, result.get(key), (o, n) -> o + 1);
+                    } else {
+                        result.put(key, 1);
+                    }
                 }
             }
         }
