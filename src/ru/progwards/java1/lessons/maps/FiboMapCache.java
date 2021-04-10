@@ -1,6 +1,7 @@
 package ru.progwards.java1.lessons.maps;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,7 +38,7 @@ public class FiboMapCache {
             fiboMapCache.fiboNumber(i);
         }
         long time = System.currentTimeMillis() - start;
-        System.out.println("fiboNumber cacheOn=" + fiboMapCache.isCacheOn + "время выполнения " + time);
+        System.out.println("fiboNumber cacheOn= " + fiboMapCache.isCacheOn + " время выполнения " + time);
 
         FiboMapCache fiboMapCache1 = new FiboMapCache(false);
         long start1 = System.currentTimeMillis();
@@ -46,12 +47,15 @@ public class FiboMapCache {
             fiboMapCache1.fiboNumber(i);
         }
         long time1 = System.currentTimeMillis() - start;
-        System.out.println("fiboNumber cacheOn=" + fiboMapCache1.isCacheOn + "время выполнения " + time1);
+        System.out.println("fiboNumber cacheOn= " + fiboMapCache1.isCacheOn + " время выполнения " + time1);
     }
 
     public BigDecimal fiboNumber(int n) {
 
         if (isCacheOn) {
+            if (fiboCache==null) {
+                fiboCache = new HashMap<>();
+            }
             if (fiboCache.containsKey(n)) {
                 return fiboCache.get(n);
             }
@@ -81,6 +85,10 @@ public class FiboMapCache {
 
     public void clearCahe() {
         fiboCache = null;
+    }
+
+    public static void main(String[] args) {
+        test();
     }
 }
 
