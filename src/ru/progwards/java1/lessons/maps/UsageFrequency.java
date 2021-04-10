@@ -3,14 +3,20 @@ package ru.progwards.java1.lessons.maps;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class UsageFrequency {
 
     private List<String> content;
 
-    public void processFile(String fileName) throws IOException {
-        this.content = Files.readAllLines(Paths.get(fileName));
+    public void processFile(String fileName) {
+        try {
+            this.content = Files.readAllLines(Paths.get(fileName));
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
     }
 
     public Map<Character, Integer> getLetters() {
