@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class UsageFrequency {
 
@@ -59,7 +60,8 @@ public class UsageFrequency {
     }
 
     public static void main(String[] args) {
-        UsageFrequency usageFrequency = new UsageFrequency();
-        System.out.println(usageFrequency.getWords());
+        //UsageFrequency usageFrequency = new UsageFrequency();
+        //System.out.println(usageFrequency.getWords());
+        System.out.println(UUID.randomUUID());
     }
 }

@@ -47,19 +47,17 @@ public class FiboMapCache {
             if (fiboCache.containsKey(n)) {
                 return fiboCache.get(n);
             }
-            int first;
-            int next = 1;
-            int current = 0;
-            for (int i = 0; i < n; i++) {
-                first = next;
-                next = current;
-                current = first + next;
-            }
+            int current = calculateFiboNumber(n);
             BigDecimal result = new BigDecimal(current);
             fiboCache.put(n, result);
             return result;
         }
 
+        int current = calculateFiboNumber(n);
+        return new BigDecimal(current);
+    }
+
+    private int calculateFiboNumber(int n) {
         int first;
         int next = 1;
         int current = 0;
@@ -68,7 +66,7 @@ public class FiboMapCache {
             next = current;
             current = first + next;
         }
-        return new BigDecimal(current);
+        return current;
     }
 
     public void clearCahe() {
