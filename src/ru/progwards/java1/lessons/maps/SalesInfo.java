@@ -35,15 +35,20 @@ public class SalesInfo {
     }
 
     public int loadOrders(String fileName) throws IOException {
-         data = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
-                .stream()
-                .map(m -> m.split(","))
-                .filter(m -> m.length >= 4).filter(m ->isInteger(m[2].trim()))
-                .filter(m -> isDouble(m[3].trim()))
-                .collect(Collectors.toList());
+        try {
+            data = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
+                    .stream()
+                    .map(m -> m.split(","))
+                    .filter(m -> m.length >= 4)
+                    .filter(m -> isInteger(m[2].trim()))
+                    .filter(m -> isDouble(m[3].trim()))
+                    .collect(Collectors.toList());
 
-        for (String[] record: data) {
-            System.out.println(Arrays.toString(record));
+            for (String[] record : data) {
+                System.out.println(Arrays.toString(record));
+            }
+        } catch (Exception ex) {
+            ex.getMessage();
         }
         return data.size();
     }
