@@ -40,7 +40,7 @@ public class SalesInfo {
             data = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
                     .stream()
                     .map(m -> m.split(","))
-                    .filter(m -> m.length >= 4)
+                    .filter(m -> m.length == 4)
                     .filter(m -> isInteger(m[2].trim()))
                     .filter(m -> isDouble(m[3].trim()))
                     .collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class SalesInfo {
             System.out.println(Arrays.toString(record));
         }
         return data.size();
-    }
+  }
 
     public Map<String, Double> getGoods() {
         Map<String, Double> goods = new TreeMap<>();
