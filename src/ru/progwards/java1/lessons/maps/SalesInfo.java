@@ -32,6 +32,7 @@ public class SalesInfo {
     public static void main(String[] args) {
         SalesInfo salesInfo = new SalesInfo();
         salesInfo.loadOrders("in.txt");
+        salesInfo.getGoods();
     }
 
     public int loadOrders(String fileName) {
@@ -46,17 +47,20 @@ public class SalesInfo {
         } catch (IOException ex) {
             ex.getMessage();
         }
+        for(String[] record: data) {
+            System.out.println(Arrays.toString(record));
+        }
         return data.size();
     }
 
     public Map<String, Double> getGoods() {
         Map<String, Double> goods = new TreeMap<>();
         for (String[] record : data) {
-            String key = record[2];
+            String key = record[1];
             if (goods.containsKey(key)) {
-                goods.merge(key, goods.get(key), (o, n) -> Double.valueOf(o + record[4]));
+                goods.merge(key, goods.get(key), (o, n) -> o + Double.parseDouble(record[3]));
             } else {
-                goods.put(record[2], Double.valueOf(record[4]));
+                goods.put(record[1], Double.valueOf(record[3]));
             }
         }
         return goods;
