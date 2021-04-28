@@ -58,9 +58,9 @@ public class SalesInfo {
         for (String[] record : data) {
             String key = record[1];
             if (goods.containsKey(key)) {
-                goods.merge(key, goods.get(key), (o, n) -> o + Double.parseDouble(record[3]));
+                goods.merge(key, goods.get(key.trim()), (o, n) -> o + Double.parseDouble(record[3]));
             } else {
-                goods.put(record[1], Double.valueOf(record[3]));
+                goods.put(record[1].trim(), Double.valueOf(record[3]));
             }
         }
         return goods;
