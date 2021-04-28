@@ -29,12 +29,12 @@ public class SalesInfo {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SalesInfo salesInfo = new SalesInfo();
         salesInfo.loadOrders("in.txt");
     }
 
-    public int loadOrders(String fileName) throws IOException {
+    public int loadOrders(String fileName) {
         try {
             data = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
                     .stream()
