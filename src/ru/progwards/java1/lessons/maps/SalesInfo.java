@@ -43,18 +43,23 @@ public class SalesInfo {
                     .filter(m -> isInteger(m[2].trim()))
                     .filter(m -> isDouble(m[3].trim()))
                     .collect(Collectors.toList());
-
-            for (String[] record : data) {
-                System.out.println(Arrays.toString(record));
-            }
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             ex.getMessage();
         }
         return data.size();
     }
 
     public Map<String, Double> getGoods() {
-        return null;
+        Map<String, Double> goods = new TreeMap<>();
+        for (String[] record : data) {
+            String key = record[2];
+            if (goods.containsKey(key)) {
+                goods.merge(key, goods.get(key), (o, n) -> Double.valueOf(o + record[4]));
+            } else {
+                goods.put(record[2], Double.valueOf(record[4]));
+            }
+        }
+        return goods;
     }
 
     public Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers() {
@@ -62,9 +67,7 @@ public class SalesInfo {
     }
 }
 
-/*3.1 Реализовать метод public int loadOrders(String fileName) -
-        вернуть количество успешно загруженных строк. Если в строке более или менее 4-x полей,
-        или количество и сумма не преобразуются в числа - эту строку не загружаем.
+/*
 
         3.2 Реализовать метод public Map<String, Double> getGoods() -
         вернуть список товаров, отсортированный по наименованию товара.
