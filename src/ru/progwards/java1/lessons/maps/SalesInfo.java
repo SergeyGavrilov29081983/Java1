@@ -32,7 +32,10 @@ public class SalesInfo {
     public static void main(String[] args) {
         SalesInfo salesInfo = new SalesInfo();
         salesInfo.loadOrders("in.txt");
-        salesInfo.getGoods();
+        Map result = salesInfo.getGoods();
+        for (Object entry: result.entrySet()) {
+            System.out.println(entry);
+        }
     }
 
     public int loadOrders(String fileName) {
@@ -58,9 +61,9 @@ public class SalesInfo {
         for (String[] record : data) {
             String key = record[1];
             if (goods.containsKey(key)) {
-                goods.merge(key.trim(), goods.get(key.trim()), (o, n) -> o + Double.parseDouble(record[3]));
+                goods.merge(key, goods.get(key), (o, n) -> o + Double.parseDouble(record[3]));
             } else {
-                goods.put(record[1].trim(), Double.valueOf(record[3]));
+                goods.put(record[1], Double.valueOf(record[3]));
             }
         }
         return goods;
