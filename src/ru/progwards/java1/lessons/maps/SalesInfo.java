@@ -76,9 +76,7 @@ public class SalesInfo {
 
 /*
 
-        3.2 Реализовать метод public Map<String, Double> getGoods() -
-        вернуть список товаров, отсортированный по наименованию товара.
-        В String - наименование товара, в Double - общая сумма продаж по товару
+
 
         3.3 Реализовать метод
 public Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers() -

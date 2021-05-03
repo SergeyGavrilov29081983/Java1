@@ -13,9 +13,6 @@ public class FiboMapCache {
 
     public FiboMapCache(boolean cacheOn) {
         isCacheOn = cacheOn;
-        if (cacheOn) {
-            fiboCache = new TreeMap<>();
-        }
     }
 
     public static void test() {
