@@ -37,6 +37,8 @@ public class FiboMapCache {
 
     public BigDecimal fiboNumber(int n) {
 
+
+
         if (isCacheOn) {
             if (fiboCache==null) {
                 fiboCache = new HashMap<>();
@@ -48,10 +50,11 @@ public class FiboMapCache {
             BigDecimal result = new BigDecimal(current);
             fiboCache.put(n, result);
             return result;
-        }
+        } else {
 
-        int current = calculateFiboNumber(n);
-        return new BigDecimal(current);
+            int current = calculateFiboNumber(n);
+            return new BigDecimal(current);
+        }
     }
 
     private int calculateFiboNumber(int n) {
