@@ -46,27 +46,27 @@ public class FiboMapCache {
             if (fiboCache.containsKey(n)) {
                 return fiboCache.get(n);
             }
-            int current = calculateFiboNumber(n);
-            BigDecimal result = new BigDecimal(current);
-            fiboCache.put(n, result);
+            BigDecimal result = calculateFiboNumber(n);
+            fiboCache.put(n,result);
             return result;
         } else {
-
-            int current = calculateFiboNumber(n);
-            return new BigDecimal(current);
+            return calculateFiboNumber(n);
         }
     }
 
-    private int calculateFiboNumber(int n) {
-        int first;
-        int next = 1;
-        int current = 0;
-        for (int i = 0; i < n; i++) {
-            first = next;
-            next = current;
-            current = first + next;
+    private BigDecimal calculateFiboNumber(int n) {
+        if (n==1 || n==2) {
+            return BigDecimal.ONE;
         }
-        return current;
+        BigDecimal fNum = BigDecimal.ZERO;
+        BigDecimal fNum1 = BigDecimal.ONE;
+        BigDecimal fNum2 = BigDecimal.ONE;
+        for (int i = 3; i<=n; i++) {
+            fNum = fNum1.add(fNum2);
+            fNum1 = fNum2;
+            fNum2 = fNum;
+        }
+        return fNum;
     }
 
     public void clearCahe() {
