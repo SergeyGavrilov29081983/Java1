@@ -36,9 +36,6 @@ public class FiboMapCache {
     }
 
     public BigDecimal fiboNumber(int n) {
-
-
-
         if (isCacheOn) {
             if (fiboCache==null) {
                 fiboCache = new HashMap<>();

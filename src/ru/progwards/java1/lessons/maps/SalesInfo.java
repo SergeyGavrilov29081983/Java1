@@ -70,7 +70,22 @@ public class SalesInfo {
     }
 
     public Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers() {
-        return null;
+        Map<String, AbstractMap.SimpleEntry<Double, Integer>> result = new TreeMap<>();
+        for (String[] record: data) {
+            String key = record[0];
+            if (result.containsKey(key)) {
+                AbstractMap.SimpleEntry<Double, Integer> entry = result.get(key);
+                Double sum = entry.getKey() + Double.parseDouble(record[2]);
+                Integer count = entry.getValue() + Integer.parseInt(record[3]);
+
+                AbstractMap.SimpleEntry entry1 = new AbstractMap.SimpleEntry(sum, count);
+                result.put(key, entry1);
+            } else {
+                AbstractMap.SimpleEntry existEntry = new AbstractMap.SimpleEntry(Double.parseDouble(record[2]), Integer.parseInt(record[3]));
+                result.put(key, existEntry);
+            }
+        }
+        return result;
     }
 }
 

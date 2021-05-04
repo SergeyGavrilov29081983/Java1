@@ -60,8 +60,9 @@ public class UsageFrequency {
     }
 
     public static void main(String[] args) {
-        //UsageFrequency usageFrequency = new UsageFrequency();
-        //System.out.println(usageFrequency.getWords());
-        System.out.println(UUID.randomUUID());
+        UsageFrequency usageFrequency = new UsageFrequency();
+        usageFrequency.processFile("wiki.test.tokens");
+       System.out.println(usageFrequency.getWords());
+
     }
 }
