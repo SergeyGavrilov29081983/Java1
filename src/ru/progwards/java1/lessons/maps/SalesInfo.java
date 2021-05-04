@@ -81,7 +81,7 @@ public class SalesInfo {
                 AbstractMap.SimpleEntry entry1 = new AbstractMap.SimpleEntry(sum, count);
                 result.put(key, entry1);
             } else {
-                AbstractMap.SimpleEntry existEntry = new AbstractMap.SimpleEntry(Double.parseDouble(record[2].trim()), Integer.parseInt(record[3]));
+                AbstractMap.SimpleEntry existEntry = new AbstractMap.SimpleEntry(Double.parseDouble(record[2].trim()), Integer.parseInt(record[3].trim()));
                 result.put(key, existEntry);
             }
         }
