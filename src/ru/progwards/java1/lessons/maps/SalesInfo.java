@@ -75,13 +75,13 @@ public class SalesInfo {
             String key = record[0];
             if (result.containsKey(key)) {
                 AbstractMap.SimpleEntry<Double, Integer> entry = result.get(key);
-                Double sum = entry.getKey() + Double.parseDouble(record[2]);
-                Integer count = entry.getValue() + Integer.parseInt(record[3]);
+                Double sum = entry.getKey() + Double.parseDouble(record[2].trim());
+                Integer count = entry.getValue() + Integer.parseInt(record[3].trim());
 
                 AbstractMap.SimpleEntry entry1 = new AbstractMap.SimpleEntry(sum, count);
                 result.put(key, entry1);
             } else {
-                AbstractMap.SimpleEntry existEntry = new AbstractMap.SimpleEntry(Double.parseDouble(record[2]), Integer.parseInt(record[3]));
+                AbstractMap.SimpleEntry existEntry = new AbstractMap.SimpleEntry(Double.parseDouble(record[2].trim()), Integer.parseInt(record[3]));
                 result.put(key, existEntry);
             }
         }
