@@ -78,10 +78,10 @@ public class SalesInfo {
                 Double sum = entry.getKey() + Double.parseDouble(record[2].trim());
                 Integer count = entry.getValue() + Integer.parseInt(record[3].trim());
 
-                AbstractMap.SimpleEntry entry1 = new AbstractMap.SimpleEntry(sum, count);
+                AbstractMap.SimpleEntry entry1 = new AbstractMap.SimpleEntry(count, sum);
                 result.put(key, entry1);
             } else {
-                AbstractMap.SimpleEntry existEntry = new AbstractMap.SimpleEntry(Double.parseDouble(record[2].trim()), Integer.parseInt(record[3].trim()));
+                AbstractMap.SimpleEntry existEntry = new AbstractMap.SimpleEntry(Integer.parseInt(record[3].trim()), Double.parseDouble(record[2].trim()));
                 result.put(key, existEntry);
             }
         }
