@@ -32,15 +32,11 @@ public class SalesInfo {
     public static void main(String[] args) {
         SalesInfo salesInfo = new SalesInfo();
         salesInfo.loadOrders("in.txt");
-       /* Map result = salesInfo.getGoods();
+        Map result = salesInfo.getGoods();
         for (Object entry: result.entrySet()) {
             System.out.println(entry);
-        }*/
-
-        Map result1 = salesInfo.getCustomers();
-        for (Object entry: result1.entrySet()) {
-            System.out.println(entry);
         }
+
     }
 
     public int loadOrders(String fileName) {
@@ -55,9 +51,6 @@ public class SalesInfo {
         } catch (IOException ex) {
             ex.getMessage();
         }
-       /* for(String[] record: data) {
-            System.out.println(Arrays.toString(record));
-        }*/
         return data.size();
   }
 
@@ -66,9 +59,9 @@ public class SalesInfo {
         for (String[] record : data) {
             String key = record[1];
             if (goods.containsKey(key)) {
-                goods.merge(key, goods.get(key), (o, n) -> o + Double.parseDouble(record[3]));
+                goods.merge(key.trim(), goods.get(key.trim()), (o, n) -> o + Double.parseDouble(record[3].trim()));
             } else {
-                goods.put(record[1], Double.valueOf(record[3]));
+                goods.put(record[1].trim(), Double.valueOf(record[3].trim()));
             }
         }
         return goods;
