@@ -44,7 +44,8 @@ public class UsageFrequency {
         Map<String, Integer> result = new HashMap<>();
         for (String str : content) {
             String[] words = str.split(" ");
-            for (String key : words) {
+            for (String word : words) {
+                String key = word.trim();
                 if (!key.isEmpty()) {
                     if (Character.isLetter(key.charAt(0)) || Character.isDigit(key.charAt(0))) {
                         if (result.containsKey(key)) {

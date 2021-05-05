@@ -29,16 +29,6 @@ public class SalesInfo {
         }
     }
 
-    public static void main(String[] args) {
-        SalesInfo salesInfo = new SalesInfo();
-        salesInfo.loadOrders("in.txt");
-        Map result = salesInfo.getGoods();
-        for (Object entry: result.entrySet()) {
-            System.out.println(entry);
-        }
-
-    }
-
     public int loadOrders(String fileName) {
         try {
             data = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)
@@ -86,12 +76,3 @@ public class SalesInfo {
         return result;
     }
 }
-
-/*
-
-
-
-        3.3 Реализовать метод
-public Map<String, AbstractMap.SimpleEntry<Double, Integer>> getCustomers() -
-        вернуть список покупателей, отсортированный по алфавиту. В String  - ФИ,
-        в Double - сумма всех покупок покупателя, в Integer - количество покупок*/
