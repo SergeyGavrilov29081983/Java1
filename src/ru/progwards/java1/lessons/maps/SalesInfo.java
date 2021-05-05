@@ -57,11 +57,11 @@ public class SalesInfo {
     public Map<String, Double> getGoods() {
         Map<String, Double> goods = new TreeMap<>();
         for (String[] record : data) {
-            String key = record[1];
+            String key = record[1].trim();
             if (goods.containsKey(key)) {
-                goods.merge(key.trim(), goods.get(key.trim()), (o, n) -> o + Double.parseDouble(record[3].trim()));
+                goods.merge(key, goods.get(key), (o, n) -> o + Double.parseDouble(record[3]));
             } else {
-                goods.put(record[1].trim(), Double.valueOf(record[3].trim()));
+                goods.put(record[1].trim(), Double.valueOf(record[3]));
             }
         }
         return goods;
