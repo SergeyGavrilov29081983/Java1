@@ -32,8 +32,13 @@ public class SalesInfo {
     public static void main(String[] args) {
         SalesInfo salesInfo = new SalesInfo();
         salesInfo.loadOrders("in.txt");
-        Map result = salesInfo.getGoods();
+       /* Map result = salesInfo.getGoods();
         for (Object entry: result.entrySet()) {
+            System.out.println(entry);
+        }*/
+
+        Map result1 = salesInfo.getCustomers();
+        for (Object entry: result1.entrySet()) {
             System.out.println(entry);
         }
     }
@@ -50,9 +55,9 @@ public class SalesInfo {
         } catch (IOException ex) {
             ex.getMessage();
         }
-        for(String[] record: data) {
+       /* for(String[] record: data) {
             System.out.println(Arrays.toString(record));
-        }
+        }*/
         return data.size();
   }
 
@@ -75,13 +80,13 @@ public class SalesInfo {
             String key = record[0];
             if (result.containsKey(key)) {
                AbstractMap.SimpleEntry<Double, Integer> entry = result.get(key);
-               Double sum = entry.getKey() + Double.parseDouble(record[2].trim());
-               Integer count = entry.getValue() + Integer.parseInt(record[3].trim());
+               Double sum = entry.getKey() + Double.parseDouble(record[3].trim());
+               Integer count = entry.getValue() + Integer.parseInt(record[2].trim());
                AbstractMap.SimpleEntry<Double, Integer> updatedEntry = new AbstractMap.SimpleEntry<>(sum, count);
                result.put(key, updatedEntry);
             } else {
                 AbstractMap.SimpleEntry<Double, Integer> entry =
-                        new AbstractMap.SimpleEntry<>(Double.parseDouble(record[2].trim()), Integer.parseInt(record[3].trim()));
+                        new AbstractMap.SimpleEntry<>(Double.parseDouble(record[3].trim()), Integer.parseInt(record[2].trim()));
                 result.put(key, entry);
             }
         }
