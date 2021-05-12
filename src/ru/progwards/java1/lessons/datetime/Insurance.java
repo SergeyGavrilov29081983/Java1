@@ -43,16 +43,7 @@ public class Insurance {
 
         }
 
-    } /*- установить дату-время начала действия страховки
-    SHORT соответствует ISO_LOCAL_DATE
-    LONG  - ISO_LOCAL_DATE_TIME
-    FULL - ISO_ZONED_DATE_TIME
-    Для вариантов, когда не задан явно часовой пояс использовать таковой по умолчанию.*/
-
-
-/*
-1.3 Реализовать методы, устанавливающие продолжительность действия страховки:
-*/
+    }
 
     public void setDuration(Duration duration){
         this.duration = duration;
@@ -67,10 +58,55 @@ public class Insurance {
     }
 
     public void setDuration(String strDuration, FormatStyle style) {
+        switch (style) {
+            case SHORT:
+                long millis = Long.parseLong(strDuration);
+                duration = Duration.ofMillis(millis);
+                break;
+            case LONG:
+                int years = Integer.parseInt(strDuration.substring(0,4));
+                int months = Integer.parseInt(strDuration.substring(5,7));
+                int days = Integer.parseInt(strDuration.substring(8,10));
+                int hours = Integer.parseInt(strDuration.substring(11,13));
+                int minutes = Integer.parseInt(strDuration.substring(14,16));
+                int seconds = Integer.parseInt(strDuration.substring(17,19));
+                duration = Duration.ofSeconds(seconds).plusMinutes(minutes).plusHours(hours);
+                duration = duration.plusDays(days).plusDays(months*30).plusDays(years*365);
+                break;
+            case FULL:
+                duration = Duration.parse(strDuration);
+                break;
+            default:
+                System.out.println("Формат задан не верно");
+        }
+    }
 
-    }//- установить продолжительность действия страховки
-    //SHORT - целое число миллисекунд (тип long)
-    //LONG  - ISO_LOCAL_DATE_TIME - как период, например “0000-06-03T10:00:00” означает, что продолжительность действия страховки 0 лет, 6 месяцев, 3 дня 10 часов.
-           // FULL - стандартный формат Duration, который получается через toString()
+    public boolean checkValid(ZonedDateTime dateTime) {
+        if (dateTime.isBefore(start)) {
+            return false;
+        }
+        if (duration == null || dateTime.isEqual(start)) {
+            return true;
+        }
+        if (dateTime.isAfter(start)) {
+            long seconds = duration.getSeconds();
+            ZonedDateTime end = start.plusSeconds(seconds);
+            return dateTime.isBefore(end);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        String validStr;
+        LocalDateTime ldt = LocalDateTime.now();
+        ZonedDateTime zdt = ZonedDateTime.of(ldt, ZoneId.of("Europe/Moscow"));
+        if (checkValid(zdt)) {
+            validStr = " is valid";
+        } else {
+            validStr = " is not valid";
+        }
+        return "Insurance issued on " + start + validStr;
+    }
 
 }
