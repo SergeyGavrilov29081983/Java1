@@ -38,4 +38,6 @@ public class UserSession {
     public void setLastAccess(LocalDateTime lastAccess) {
         this.lastAccess = lastAccess;
     }
+
+
 }

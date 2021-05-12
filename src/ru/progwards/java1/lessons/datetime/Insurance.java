@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Insurance {
+
     public static enum FormatStyle {SHORT, LONG, FULL}
 
     private ZonedDateTime start;
@@ -38,8 +39,6 @@ public class Insurance {
             LocalTime localTime = LocalTime.of(0, 0 ,0, 0);
             LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
             start = ZonedDateTime.of(localDateTime, zone);
-
-        } else {
 
         }
 

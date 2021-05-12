@@ -18,7 +18,14 @@ public class SessionManager {
     }
 
     public UserSession find(String userName) {
-        return sessions.get(userName);
+        for (Map.Entry<String, UserSession> session : sessions.entrySet()) {
+            UserSession value = session.getValue();
+            if (value.getUserName().equals(userName)) {
+                value.setLastAccess(LocalDateTime.now());
+                return value;
+            }
+        }
+        return null;
     }
 
     public UserSession get(int sessionHandle) {
