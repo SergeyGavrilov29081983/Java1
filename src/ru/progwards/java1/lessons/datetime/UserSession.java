@@ -19,25 +19,15 @@ public class UserSession {
         return sessionHandle;
     }
 
-    public void setSessionHandle(int sessionHandle) {
-        this.sessionHandle = sessionHandle;
-    }
-
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public LocalDateTime getLastAccess() {
         return lastAccess;
     }
 
-    public void setLastAccess(LocalDateTime lastAccess) {
-        this.lastAccess = lastAccess;
+    public void updateLastAccess() {
+        lastAccess = LocalDateTime.now();
     }
-
-
 }

@@ -15,7 +15,7 @@ public class SessionManager {
     }
 
     public void add(UserSession userSession) {
-        userSession.setLastAccess(LocalDateTime.now());
+        userSession.updateLastAccess();
         sessions.put(userSession.getUserName(), userSession);
     }
 
@@ -23,7 +23,7 @@ public class SessionManager {
         for (Map.Entry<String, UserSession> session : sessions.entrySet()) {
             UserSession value = session.getValue();
             if (value.getUserName().equals(userName)) {
-                value.setLastAccess(LocalDateTime.now());
+                value.updateLastAccess();
                 return value;
 
             }
@@ -35,7 +35,7 @@ public class SessionManager {
         for (Map.Entry<String, UserSession> session : sessions.entrySet()) {
             UserSession value = session.getValue();
             if (value.getSessionHandle() == sessionHandle) {
-                value.setLastAccess(LocalDateTime.now());
+                value.updateLastAccess();
                 return value;
             }
         }
@@ -59,6 +59,15 @@ public class SessionManager {
                 sessions.remove(session.getKey());
             }
         }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        SessionManager sessionManager = new SessionManager(1);
+        UserSession userSession = new UserSession("User1");
+        sessionManager.add(userSession);
+        System.out.println(sessionManager.get(userSession.getSessionHandle()));
+        Thread.sleep(1000);
+        System.out.println(sessionManager.get(userSession.getSessionHandle()));
     }
 }
 
