@@ -6,14 +6,16 @@ import java.util.Map;
 
 public class SessionManager {
 
-    private Map<String, UserSession> sessions = new HashMap<>();
+    private Map<String, UserSession> sessions;
     private int sessionValid;
 
     public SessionManager(int sessionValid) {
+        sessions = new HashMap<>();
         this.sessionValid = sessionValid;
     }
 
     public void add(UserSession userSession) {
+        userSession.setLastAccess(LocalDateTime.now());
         sessions.put(userSession.getUserName(), userSession);
     }
 
@@ -23,6 +25,7 @@ public class SessionManager {
             if (value.getUserName().equals(userName)) {
                 value.setLastAccess(LocalDateTime.now());
                 return value;
+
             }
         }
         return null;
