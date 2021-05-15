@@ -23,9 +23,11 @@ public class SessionManager {
         for (Map.Entry<String, UserSession> session : sessions.entrySet()) {
             UserSession value = session.getValue();
             if (value.getUserName().equals(userName)) {
-                value.updateLastAccess();
-                return value;
-
+                LocalDateTime AccessExp = value.getLastAccess().plusSeconds(sessionValid);
+                if (AccessExp.isAfter(LocalDateTime.now())) {
+                    value.updateLastAccess();
+                    return value;
+                }
             }
         }
         return null;
@@ -35,8 +37,11 @@ public class SessionManager {
         for (Map.Entry<String, UserSession> session : sessions.entrySet()) {
             UserSession value = session.getValue();
             if (value.getSessionHandle() == sessionHandle) {
-                value.updateLastAccess();
-                return value;
+                LocalDateTime AccessExp = value.getLastAccess().plusSeconds(sessionValid);
+                if (AccessExp.isAfter(LocalDateTime.now())) {
+                    value.updateLastAccess();
+                    return value;
+                }
             }
         }
         return null;
