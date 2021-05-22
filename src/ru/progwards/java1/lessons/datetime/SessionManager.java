@@ -3,7 +3,6 @@ package ru.progwards.java1.lessons.datetime;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 public class SessionManager {
     private Collection<UserSession> sessions = new ArrayList<>();
@@ -49,13 +48,10 @@ public class SessionManager {
     }
 
     public void deleteExpired() {
-        for (UserSession temp: sessions) {
-            LocalDateTime AccessExp = temp.getLastAccess().plusSeconds(sessionValid);
-            if (AccessExp.isBefore(LocalDateTime.now())) {
-                sessions.remove(temp);
-            }
-        }
+        sessions.removeIf(temp -> temp.getLastAccess().plusSeconds(sessionValid).isBefore(LocalDateTime.now()));
     }
 }
+
+
 
 
