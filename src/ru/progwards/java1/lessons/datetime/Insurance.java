@@ -17,30 +17,26 @@ public class Insurance {
     }
 
     public Insurance(String strStart, FormatStyle style) {
-        ZoneId zone = ZoneId.of("Europe/Moscow");
-        DateTimeFormatter dateTimeFormatter;
-        if (style.equals(FormatStyle.SHORT)) {
-            dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
-            LocalDate localDate = LocalDate.parse(strStart, dateTimeFormatter);
-            LocalTime localTime = LocalTime.of(0, 0 ,0, 0);
-            LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
-            start = ZonedDateTime.of(localDateTime, zone);
+        ZoneId defaultZone = ZoneId.of("Europe/Moscow");
+        DateTimeFormatter dtf;
 
-        } else if (style.equals(FormatStyle.LONG)) {
-            dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-            LocalDate localDate = LocalDate.parse(strStart, dateTimeFormatter);
-            LocalTime localTime = LocalTime.of(0, 0 ,0, 0);
-            LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
-            start = ZonedDateTime.of(localDateTime, zone);
+        if(FormatStyle.SHORT == style) {
+            dtf = DateTimeFormatter.ISO_LOCAL_DATE;
+            LocalDate ldate = LocalDate.parse(strStart, dtf);
+            LocalTime ltime = LocalTime.of(0,0,0);
+            LocalDateTime temp1 = LocalDateTime.of(ldate, ltime);
+            this.start = temp1.atZone(defaultZone);
 
-        } else if (style.equals(FormatStyle.FULL)) {
-            dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-            LocalDate localDate = LocalDate.parse(strStart, dateTimeFormatter);
-            LocalTime localTime = LocalTime.of(0, 0 ,0, 0);
-            LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
-            start = ZonedDateTime.of(localDateTime, zone);
+        } else if (FormatStyle.LONG == style) {
+            dtf = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+            LocalDateTime temp2 = LocalDateTime.parse(strStart, dtf);
+            this.start = temp2.atZone(defaultZone);
 
+        } else if (FormatStyle.FULL == style) {
+            dtf = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+            this.start = ZonedDateTime.parse(strStart, dtf);
         }
+
 
     }
 
