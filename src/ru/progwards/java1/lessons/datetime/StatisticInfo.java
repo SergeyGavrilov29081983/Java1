@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.datetime;
 
-public class StatisticInfo {
+public class StatisticInfo implements Comparable<StatisticInfo> {
 
     public String sectionName;
     public int fullTime;
@@ -15,4 +15,8 @@ public class StatisticInfo {
 
     }
 
+    @Override
+    public int compareTo(StatisticInfo o) {
+        return sectionName.compareTo(o.sectionName);
+    }
 }
