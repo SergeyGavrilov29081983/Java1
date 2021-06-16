@@ -10,24 +10,28 @@ public class FindDuplicates {
 
     private final List<List<String>> files = new ArrayList<>();
 
-    public List<List<String>> findDuplicates(String startPath) throws IOException {
+    public List<List<String>> findDuplicates(String startPath) {
 
         Path path = Paths.get(startPath);
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**");
 
-        Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
-            @Override
-            public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
-                if (matcher.matches(path))
-                    System.out.println(path);
-                return FileVisitResult.CONTINUE;
-            }
+        try {
+            Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+                    if (matcher.matches(path))
+                        System.out.println(path);
+                    return FileVisitResult.CONTINUE;
+                }
 
-            @Override
-            public FileVisitResult visitFileFailed(Path file, IOException e) {
-                return FileVisitResult.CONTINUE;
-            }
-        });
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException e) {
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return files;
     }
 

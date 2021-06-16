@@ -1,6 +1,15 @@
 package ru.progwards.java1.lessons.datetime;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Profiler {
     static Map<String, StatisticInfo> Sections = new HashMap<>();
@@ -57,4 +66,37 @@ public class Profiler {
         res.sort(StatisticInfo::compareTo);
         return res;
     }
+
+    public static void main(String[] args) throws IOException {
+
+        replaceF("123.txt");
+
+    }
+
+    static String createFolder(String name) {
+        File file = new File(name);
+        file.mkdir();
+        Path p = Paths.get(name);
+        return p.toAbsolutePath().getParent().getParent().toString();
+
+    }
+
+    static boolean replaceF(String name) {
+        Path path = Paths.get(name);
+        if (Files.exists(path)) {
+            try {
+                byte[] text = Files.readAllBytes(path);
+                String result = new String(text, "UTF-8");
+                String replace = result.replace('F', 'f');
+                Files.write(path,replace.getBytes());
+                return true;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
+    }
+   /* который заменяет в файле все F на f, в случае ошибки вернуть false.
+    Для реализации пользоваться методами java.nio.file.Files.*/
 }
+
