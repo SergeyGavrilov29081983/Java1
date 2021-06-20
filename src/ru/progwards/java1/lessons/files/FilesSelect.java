@@ -18,7 +18,7 @@ public class FilesSelect {
 
         try {
             Path directory = Files.createDirectory(Paths.get(outFolder), fileAttributes);
-            Files.walkFileTree(Paths.get(inFolder), new SimpleFileVisitor<Path>() {
+            Files.walkFileTree(Paths.get(inFolder).normalize(), new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
                     if (pathMatcher.matches(path)) {
@@ -35,8 +35,10 @@ public class FilesSelect {
                                                 Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
                                                 Files.copy(path, filePath);
                                             } else {
+                                                if (!Files.exists(Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString()))) {
                                                 Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
                                                 Files.copy(path, filePath);
+                                            }
                                             }
                                         }
                                     }
@@ -63,7 +65,7 @@ public class FilesSelect {
 
 
     public static void main(String[] args) {
-        selectFiles("files", "outFiles", Arrays.asList("one", "two"));
+        selectFiles("/home/sergey/inFolder", "outFiles", Arrays.asList("111", "222", "333", "123"));
     }
 
 
