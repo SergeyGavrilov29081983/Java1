@@ -16,8 +16,9 @@ public class FilesSelect {
         PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher(PATTERN);
         FileAttribute<?>[] fileAttributes = new FileAttribute[0];
 
+
+
         try {
-            Path directory = Files.createDirectory(Paths.get(outFolder), fileAttributes);
             Files.walkFileTree(Paths.get(inFolder).normalize(), new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
@@ -29,16 +30,35 @@ public class FilesSelect {
                                 for (String str : tmp) {
                                     for (String s : keys) {
                                         if (s.trim().equalsIgnoreCase(str.trim())) {
-                                            Path path1 = Paths.get(directory.toString() + "/" + s);
-                                            if (!Files.exists(path1)) {
-                                                Files.createDirectory(path1);
-                                                Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
-                                                Files.copy(path, filePath);
+                                            if (!Files.exists(Paths.get(outFolder))) {
+                                                Path directory = Files.createDirectory(Paths.get(outFolder), fileAttributes);
+                                                Path path1 = Paths.get(directory.toString() + "/" + s);
+                                                if (!Files.exists(path1)) {
+                                                    Files.createDirectory(path1);
+                                                    Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
+                                                    Files.copy(path, filePath);
+                                                } else {
+                                                    if (!Files.exists(Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString()))) {
+                                                        Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
+                                                        Files.copy(path, filePath);
+                                                    }
+                                                }
                                             } else {
-                                                if (!Files.exists(Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString()))) {
-                                                Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
-                                                Files.copy(path, filePath);
-                                            }
+                                                Path directory = Paths.get(outFolder);
+                                                directory.normalize();
+                                                Path path1 = Paths.get(directory.toString() + "/" + s);
+
+                                                if (!Files.exists(path1)) {
+                                                    Files.createDirectory(path1);
+                                                    Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
+                                                    Files.copy(path, filePath);
+                                                } else {
+                                                    if (!Files.exists(Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString()))) {
+                                                        Path filePath = Paths.get(directory.toString() + "/" + s + "/" + path.getFileName().toString());
+                                                        Files.copy(path, filePath);
+                                                    }
+                                                }
+
                                             }
                                         }
                                     }
