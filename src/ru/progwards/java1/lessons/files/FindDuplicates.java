@@ -16,14 +16,16 @@ public class FindDuplicates {
 
         File dir = new File(startPath);
         File[] listFiles = dir.listFiles();
-
         for (File file : listFiles) {
             if (file.isDirectory()) {
                 findDuplicates(file.getPath());
             } else {
                 Item item = new Item(file.getName(), file.lastModified(), file.length());
                 List<String> paths = findDublicate(item, startPath);
-                files.add(paths);
+
+                if (!paths.isEmpty()) {
+                    files.add(paths);
+                }
             }
         }
         return files;
@@ -34,9 +36,6 @@ public class FindDuplicates {
         File dir = new File(path);
         File[] listFiles = dir.listFiles();
         for (File file : listFiles) {
-            if (file.isDirectory()) {
-                findDublicate(item, file.toPath().toString());
-            } else {
                 Item itemToEqual = new Item(file.getName(), file.lastModified(), file.length());
                 if (item.equals(itemToEqual)) {
                     try {
@@ -45,7 +44,7 @@ public class FindDuplicates {
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+
                 }
             }
         }
@@ -83,8 +82,13 @@ public class FindDuplicates {
 }*/
 
     public static void main(String[] args) {
-        findDuplicates("outFiles");
-        System.out.println();
+        List list = findDuplicates("outFiles");
+
+        for (Object res: list
+             ) {
+            System.out.println(res);
+        }
+
     }
 
     static class Item {
