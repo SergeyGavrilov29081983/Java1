@@ -43,6 +43,7 @@ public class FindDuplicates {
                     }
                 }
         }
+        result.remove(0);
         return result;
     }
 
