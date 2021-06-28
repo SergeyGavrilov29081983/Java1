@@ -38,15 +38,10 @@ public class FindDuplicates {
         for (File file : listFiles) {
                 Item itemToEqual = new Item(file.getName(), file.lastModified(), file.length());
                 if (item.equals(itemToEqual)) {
-                    try {
-                        if (sameContent(new File(path), new File(file.getName()))) {
-                            result.add(file.getAbsolutePath());
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-
+                    if (true) {
+                        result.add(file.getAbsolutePath());
+                    }
                 }
-            }
         }
         return result;
     }
