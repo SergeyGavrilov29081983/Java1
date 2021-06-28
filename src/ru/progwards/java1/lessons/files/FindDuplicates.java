@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -38,28 +39,36 @@ public class FindDuplicates {
         for (File file : listFiles) {
                 Item itemToEqual = new Item(file.getName(), file.lastModified(), file.length());
                 if (item.equals(itemToEqual)) {
-                    if (true) {
-                        result.add(file.getAbsolutePath());
+                    try {
+                        if (!file.isDirectory()) {
+                            if (sameContent(dir, file)) {
+                                result.add(file.getAbsolutePath());
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
         }
-        result.remove(0);
         return result;
     }
 
     public static boolean sameContent(File f1, File f2) throws IOException {
-        if (f1.length() != f2.length()) return false;
-        FileInputStream fis1 = new FileInputStream(f1);
-        FileInputStream fis2 = new FileInputStream(f2);
+
         try {
-            int byte1;
-            while ((byte1 = fis1.read()) != -1) {
-                int byte2 = fis2.read();
-                if (byte1 != byte2) return false;
+
+            byte[] file1 = Files.readAllBytes(Paths.get(f1.getPath()));
+            byte[] file2 = Files.readAllBytes(Paths.get(f2.getPath()));
+            if (file1.length != file2.length) {
+                return false;
             }
-        } finally {
-            fis1.close();
-            fis2.close();
+            for (int i = 0; i < file1.length; i++) {
+                if (file1[i] != file2[i]) {
+                    return false;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return true;
     }
