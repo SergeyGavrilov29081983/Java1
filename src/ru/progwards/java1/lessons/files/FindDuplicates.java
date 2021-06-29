@@ -13,7 +13,7 @@ public class FindDuplicates {
 
     public static final List<List<String>> files = new ArrayList<>();
 
-    public static Map<Object, List<Item>> findDuplicates(String startPath) throws IOException {
+    public static List<List<String>> findDuplicates(String startPath) throws IOException {
         Map<Object, List<Item>> collect = Files.walk(Paths.get(startPath), 999).filter(Files::isRegularFile)
                 .map(p -> new Item(p.toFile().getName(), p.toFile().lastModified(), p.toFile().length()))
                 .collect(Collectors.groupingBy(item -> item.name, Collectors.toList()));
@@ -25,11 +25,11 @@ public class FindDuplicates {
             }
             files.add(result);
         }
-        return collect;
+        return files;
     }
 
 
-    public static void main(String[] args) throws IOException {
+   /* public static void main(String[] args) throws IOException {
         Map<Object, List<Item>> list = findDuplicates("outFiles");
 
         for (Map.Entry<Object, List<Item>> entry : list.entrySet()) {
@@ -41,7 +41,7 @@ public class FindDuplicates {
         }
 
     }
-
+*/
     static class Item {
         String name;
         long lastModifiedTime;
