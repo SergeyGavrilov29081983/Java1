@@ -1,97 +1,43 @@
 package ru.progwards.java1.lessons.files;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class FindDuplicates {
 
     public static final List<List<String>> files = new ArrayList<>();
 
-    public static List<List<String>> findDuplicates(String startPath) {
+    public static Map<Object, List<Item>> findDuplicates(String startPath) throws IOException {
+        Map<Object, List<Item>> collect = Files.walk(Paths.get(startPath), 999).filter(Files::isRegularFile)
+                .map(p -> new Item(p.toFile().getName(), p.toFile().lastModified(), p.toFile().length()))
+                .collect(Collectors.groupingBy(item -> item.name, Collectors.toList()));
 
-        File dir = new File(startPath);
-        File[] listFiles = dir.listFiles();
-        for (File file : listFiles) {
-            if (file.isDirectory()) {
-                findDuplicates(file.getPath());
-            } else {
-                Item item = new Item(file.getName(), file.lastModified(), file.length());
-                List<String> paths = findDublicate(item, startPath);
-
-                if (!paths.isEmpty()) {
-                    files.add(paths);
-                }
+        for (Map.Entry<Object, List<Item>> coll : collect.entrySet()) {
+            List<String> result = new ArrayList<>();
+            for (Item str : coll.getValue()) {
+                result.add(str.name);
             }
+            files.add(result);
         }
-        return files;
+        return collect;
     }
 
-    private static List<String> findDublicate(Item item, String path) {
-        List<String> result = new ArrayList<>();
-        File dir = new File(path);
-        File[] listFiles = dir.listFiles();
-        for (File file : listFiles) {
-                Item itemToEqual = new Item(file.getName(), file.lastModified(), file.length());
-                if (item.equals(itemToEqual)) {
-                    try {
-                        if (!file.isDirectory()) {
-                            if (sameContent(dir, file)) {
-                                result.add(file.getAbsolutePath());
-                            }
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-        }
-        return result;
-    }
 
-    public static boolean sameContent(File f1, File f2) throws IOException {
+    public static void main(String[] args) throws IOException {
+        Map<Object, List<Item>> list = findDuplicates("outFiles");
 
-        try {
-
-            byte[] file1 = Files.readAllBytes(Paths.get(f1.getPath()));
-            byte[] file2 = Files.readAllBytes(Paths.get(f2.getPath()));
-            if (file1.length != file2.length) {
-                return false;
+        for (Map.Entry<Object, List<Item>> entry : list.entrySet()) {
+            System.out.println(entry);
+            List list2 = entry.getValue();
+            for (Object object : list2) {
+                System.out.println(object.toString());
             }
-            for (int i = 0; i < file1.length; i++) {
-                if (file1[i] != file2[i]) {
-                    return false;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-  /*  private static String getFileExtension(File file) {
-        String fileName = file.getName();
-        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
-        else return "";
-    }*/
-
-   /* В заданном каталоге и его подкаталогах найти файлы, точно совпадающие по названию
-            (и расширению), дате-времени последнего изменения, размеру и по содержимому.
-    Сигнатура метода public List<List<String>> findDuplicates(String startPath), результат -
-    список, содержащий списки строк с именами и полными путями совпадающих файлов.
-}*/
-
-    public static void main(String[] args) {
-        List list = findDuplicates("outFiles");
-
-        for (Object res: list
-             ) {
-            System.out.println(res);
         }
 
     }
@@ -107,6 +53,7 @@ public class FindDuplicates {
             this.size = size;
         }
 
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -121,6 +68,16 @@ public class FindDuplicates {
         public int hashCode() {
             return Objects.hash(name, lastModifiedTime, size);
         }
+
+        @Override
+        public String toString() {
+            return "Item{" +
+                    "name='" + name + '\'' +
+                    ", lastModifiedTime=" + lastModifiedTime +
+                    ", size=" + size +
+                    '}';
+        }
     }
+
 
 }
