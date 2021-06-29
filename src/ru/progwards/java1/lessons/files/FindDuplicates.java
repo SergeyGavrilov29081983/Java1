@@ -13,10 +13,15 @@ public class FindDuplicates {
 
     public static final List<List<String>> files = new ArrayList<>();
 
-    public static List<List<String>> findDuplicates(String startPath) throws IOException {
-        Map<Object, List<Item>> collect = Files.walk(Paths.get(startPath), 999).filter(Files::isRegularFile)
-                .map(p -> new Item(p.toFile().getName(), p.toFile().lastModified(), p.toFile().length()))
-                .collect(Collectors.groupingBy(item -> item.name, Collectors.toList()));
+    public static List<List<String>> findDuplicates(String startPath) {
+        Map<Object, List<Item>> collect = null;
+        try {
+            collect = Files.walk(Paths.get(startPath), 999).filter(Files::isRegularFile)
+                    .map(p -> new Item(p.toFile().getName(), p.toFile().lastModified(), p.toFile().length()))
+                    .collect(Collectors.groupingBy(item -> item.name, Collectors.toList()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for (Map.Entry<Object, List<Item>> coll : collect.entrySet()) {
             List<String> result = new ArrayList<>();
