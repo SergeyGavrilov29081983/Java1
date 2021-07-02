@@ -1,52 +1,68 @@
 package ru.progwards.java1.lessons.files;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FindDuplicates {
 
     public static final List<List<String>> files = new ArrayList<>();
+    public static final String PATTERN = "glob:**";
 
     public static List<List<String>> findDuplicates(String startPath) {
-        Map<Object, List<Item>> collect = null;
-        try {
-            collect = Files.walk(Paths.get(startPath), 999).filter(Files::isRegularFile)
-                    .map(p -> new Item(p.toFile().getName(), p.toFile().lastModified(), p.toFile().length()))
-                    .collect(Collectors.groupingBy(item -> item.name, Collectors.toList()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<String> result = new ArrayList<>();
+        PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher(PATTERN);
 
-        for (Map.Entry<Object, List<Item>> coll : collect.entrySet()) {
-            List<String> result = new ArrayList<>();
-            for (Item str : coll.getValue()) {
-                result.add(str.name);
+        try {
+            List<Path> listPaths = Files.walk(Paths.get(startPath), 999)
+                    .filter(Files::isRegularFile)
+                    .collect(Collectors.toList());
+            for (Path path : listPaths) {
+                File tmp = path.toFile();
+                for (Path pathToEqual : listPaths){
+                    if (checkEquality(tmp, pathToEqual.toFile())) {
+                        result.add(pathToEqual.toString());
+                    }
+                }
             }
             files.add(result);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         return files;
     }
 
+    public static boolean checkEquality(File file1, File file2) {
+        if (file1.length() == file2.length() || file1.getName().equals(file2.getName()) || file1.lastModified() == file2.lastModified()) {
+            try {
+                byte[] bytes = Files.readAllBytes(Paths.get(file1.getPath()));
+                byte[] bytes1 = Files.readAllBytes(Paths.get(file2.getPath()));
+                return Arrays.equals(bytes, bytes1);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
+    }
 
-   /* public static void main(String[] args) throws IOException {
-        Map<Object, List<Item>> list = findDuplicates("outFiles");
 
-        for (Map.Entry<Object, List<Item>> entry : list.entrySet()) {
-            System.out.println(entry);
-            List list2 = entry.getValue();
-            for (Object object : list2) {
-                System.out.println(object.toString());
+    public static void main(String[] args) throws IOException {
+        List<List<String>> outFiles = findDuplicates("outFiles");
+
+        for (List<String> outFile : outFiles) {
+            for (String s : outFile) {
+                System.out.println(s);
             }
         }
 
     }
-*/
+
     static class Item {
         String name;
         long lastModifiedTime;
@@ -86,3 +102,22 @@ public class FindDuplicates {
 
 
 }
+
+  /*  Map<Object, List<Item>> collect = null;
+        try {
+                collect = Files.walk(Paths.get(startPath), 999).filter(Files::isRegularFile)
+                .map(p -> new Item(p.toFile().getName(), p.toFile().lastModified(), p.toFile().length()))
+                .collect(Collectors.groupingBy(item -> item.name, Collectors.toList()));
+                } catch (IOException e) {
+                e.printStackTrace();
+                }
+
+                for (Map.Entry<Object, List<Item>> coll : collect.entrySet()) {
+
+        List<String> result = new ArrayList<>();
+        for (Item str : coll.getValue()) {
+        result.add(str.name);
+        }
+        files.add(result);
+        }
+        return files;*/

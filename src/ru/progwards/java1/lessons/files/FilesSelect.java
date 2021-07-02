@@ -16,8 +16,6 @@ public class FilesSelect {
         PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher(PATTERN);
         FileAttribute<?>[] fileAttributes = new FileAttribute[0];
 
-
-
         try {
             Files.walkFileTree(Paths.get(inFolder).normalize(), new SimpleFileVisitor<Path>() {
                 @Override
