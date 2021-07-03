@@ -3,10 +3,7 @@ package ru.progwards.java1.lessons.files;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FindDuplicates {
@@ -29,9 +26,12 @@ public class FindDuplicates {
                         result.add(pathToEqual.toString());
                     }
                 }
+                Set<String> set = new HashSet<>(result);
+                result.clear();
+                result.addAll(set);
             }
-            files.add(result);
 
+            files.add(result);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -39,13 +39,17 @@ public class FindDuplicates {
     }
 
     public static boolean checkEquality(File file1, File file2) {
-        if (file1.length() == file2.length() || file1.getName().equals(file2.getName()) || file1.lastModified() == file2.lastModified()) {
-            try {
-                byte[] bytes = Files.readAllBytes(Paths.get(file1.getPath()));
-                byte[] bytes1 = Files.readAllBytes(Paths.get(file2.getPath()));
-                return Arrays.equals(bytes, bytes1);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+        if (file1.length() == file2.length()) {
+            if (file1.getName().equals(file2.getName())) {
+                if (file1.lastModified() == file2.lastModified()) {
+                    try {
+                        byte[] bytes = Files.readAllBytes(Paths.get(file1.getPath()));
+                        byte[] bytes1 = Files.readAllBytes(Paths.get(file2.getPath()));
+                        return Arrays.equals(bytes, bytes1);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
             }
         }
         return false;
@@ -58,8 +62,14 @@ public class FindDuplicates {
         for (List<String> outFile : outFiles) {
             for (String s : outFile) {
                 System.out.println(s);
+
             }
         }
+        System.out.println(outFiles);
+        File file1 = Paths.get("outFiles/111/file1.txt").toFile();
+        File file2 = Paths.get("outFiles/222/file1.txt").toFile();
+        boolean b = checkEquality(file1, file2);
+        System.out.println(b);
 
     }
 
