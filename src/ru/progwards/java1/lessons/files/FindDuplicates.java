@@ -46,6 +46,7 @@ public class FindDuplicates {
                 } else {
                     result.add(path.toString());
                 }
+                files.add(result);
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -68,5 +69,12 @@ public class FindDuplicates {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        ru.progwards.diffWorkClasses.FindDuplicates t = new ru.progwards.diffWorkClasses.FindDuplicates();
+        List<List<String>> tt = t.findDuplicates("outFiles");
+        for (List<String> l : tt)
+            System.out.println(l);
     }
 }
