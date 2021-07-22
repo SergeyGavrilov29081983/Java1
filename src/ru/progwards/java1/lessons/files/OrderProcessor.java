@@ -69,10 +69,13 @@ public class OrderProcessor {
         }
 
     }
-    /*загружает заказы
-    за указанный диапазон дат, с start до finish, обе даты включительно. Если start == null, значит нет ограничения
-    по дате слева, если finish == null, значит нет ограничения по дате справа, если shopId == null - грузим для всех магазинов
-    При наличии хотя бы одной ошибке в формате файла, файл полностью игнорируется, т.е. Не поступает в обработку.
-    Метод возвращает количество файлов с ошибками. При этом, если в классе содержалась информация, ее надо удалить*/
-
+    public Map<String, Double> statisticsByShop() {
+        return null;
+    }
+    public Map<String, Double> statisticsByGoods() {
+        return null;
+    }
+    public Map<LocalDate, Double> statisticsByDay() {
+        return null;
+    }
 }
