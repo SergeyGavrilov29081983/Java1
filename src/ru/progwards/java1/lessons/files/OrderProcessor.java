@@ -69,6 +69,10 @@ public class OrderProcessor {
         }
 
     }
+
+    public List<Order> process(String shopId) {
+        return null;
+    }
     public Map<String, Double> statisticsByShop() {
         return null;
     }
