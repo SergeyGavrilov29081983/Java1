@@ -16,4 +16,5 @@ public class Order {
     public List<OrderItem> items;
 
     public double sum;
+
 }
