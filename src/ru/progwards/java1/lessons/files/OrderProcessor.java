@@ -9,13 +9,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class OrderProcessor {
 
-    public static final String PATTERN = "***-******-****.csv";
-    private final PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher(PATTERN);
     private final Path path;
+    int errorCounter;
     List<Order> infoList = new ArrayList<>();
 
 
@@ -83,14 +81,12 @@ public class OrderProcessor {
     }
 
     public int loadOrders(LocalDate start, LocalDate finish, String shopId) {
-        AtomicInteger counter = new AtomicInteger(0);
-        String pattern = shopId;
+        errorCounter = 0;
+        String pattern = shopId; // if shopId.length()!=3 files will be not found
         if (shopId == null) {
             pattern = "???";
         }
-
         PathMatcher pm = FileSystems.getDefault().getPathMatcher("glob:**/" + pattern + "-??????-????.csv");
-
         try {
             Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
                 @Override
@@ -102,11 +98,11 @@ public class OrderProcessor {
                             ZoneId defaultZone = ZoneId.of("Europe/Moscow");
                             LocalDateTime ldt = LocalDateTime.ofInstant(i, defaultZone);
                             if (isPeriod(start, finish, ldt.toLocalDate())) {
-                                Order tmpOrder = loadOrder(p);
-                                if (tmpOrder != null) {
-                                    infoList.add(tmpOrder);
+                                Order one = loadOrder(p);
+                                if (one != null) {
+                                    infoList.add(one);
                                 } else {
-                                    counter.incrementAndGet();
+                                    errorCounter++;
                                 }
                             }
                         } catch (IOException e) {
@@ -124,7 +120,7 @@ public class OrderProcessor {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return counter.intValue();
+        return errorCounter;
     }
 
 
