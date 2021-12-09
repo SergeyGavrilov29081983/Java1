@@ -90,7 +90,8 @@ public class FruitBox<T> {
     }
 
     public int compareTo(FruitBox<T> box) {
-        return Float.compare(box.getWeight(), this.getWeight());
+        int a = Float.compare(box.getWeight(), this.getWeight());
+        return a == 0 ? 0 : 1;
     }
 }
 
