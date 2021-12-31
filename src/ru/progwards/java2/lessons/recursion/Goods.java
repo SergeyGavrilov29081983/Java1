@@ -9,6 +9,13 @@ public class Goods {
     private double price;
     private Instant expired;
 
+    Goods(String name, String number, int available, double price, Instant expired) {
+        this.name = name;
+        this.number = number;
+        this.available = available;
+        this.price = price;
+        this.expired = expired;
+    }
     public String getName() {
         return name;
     }
@@ -48,4 +55,6 @@ public class Goods {
     public void setExpired(Instant expired) {
         this.expired = expired;
     }
+
+
 }

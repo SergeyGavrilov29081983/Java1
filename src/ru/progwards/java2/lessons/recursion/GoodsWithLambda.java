@@ -45,17 +45,33 @@ public class GoodsWithLambda {
                 .collect(Collectors.toList());
     }
 
-    public List<Goods> сountLess(int count) {
+    public List<Goods> countLess(int count) {
         return list.stream()
                 .filter(goods -> goods.getAvailable() < count)
                 .sorted(Comparator.comparing(Goods::getAvailable))
                 .collect(Collectors.toList());
     }
 
-    public List<Goods> сountBetween(int count1, int count2) {
+    public List<Goods> countBetween(int count1, int count2) {
         return list.stream()
                 .filter(goods -> goods.getAvailable() < count2 && goods.getAvailable() > count1)
                 .sorted(Comparator.comparing(Goods::getAvailable))
                 .collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) {
+        List<Goods> lg = new ArrayList<>();
+        lg.add(new Goods("caramel", "vv67ty", 3, 0.1, Instant.now()));
+        lg.add(new Goods("apple", "av17ty", 2, 0.1, Instant.now()));
+        lg.add(new Goods("banana", "aV37ty", 2, 0.1, Instant.parse("2021-01-29T14:50:17.986308500Z")));
+        GoodsWithLambda gwl = new GoodsWithLambda();
+        gwl.setGoods(lg);
+        gwl.sortByName().forEach(x -> System.out.println(x.getName()));
+        gwl.sortByNumber().forEach(x -> System.out.println(x.getNumber()));
+        gwl.sortByPartNumber().forEach(x -> System.out.println(x.getNumber()));
+        gwl.sortByAvailabilityAndNumber().forEach(x -> System.out.println(x.getNumber() + " " + x.getAvailable()));
+        gwl.expiredAfter(Instant.now()).forEach(x -> System.out.println(x.getExpired()));
+        gwl.countLess(3).forEach(x -> System.out.println(x.getAvailable()));
+        gwl.countBetween(2, 3).forEach(x -> System.out.println(x.getAvailable()));
     }
 }

@@ -1,34 +1,20 @@
 package ru.progwards.java2.lessons.recursion;
 
 public class AsNumbersSum {
+    private static final String eq = " = ";
+    private static final String pl = "+";
 
     public static String asNumbersSum(int number) {
-        if (number == 1) {
-            return "";
-        }
-        int digit = 5;
-        String res = "";
-
-        return number + result(number, digit, res);
+        return number + asNumbersSumR(number - 1, 1, "");
     }
 
-    public static String result(int number, int digit, String res) {
-        if (digit > number) {
-            return result(number, digit - number, res + number + "+")
-                    + result(number - 1, digit + 1, res);
-        } else {
-            return "=" + res + number + "+" + digit + result(digit - 1, 1,  res + number + "+")
-                    + result(number -1, digit + 1, res);
-        }
-
+    public static String asNumbersSumR(int n, int i, String p) {
+        return (n != 0 ? (i > n ? asNumbersSumR(n, i - n, p + n + pl) : eq + p + n + pl + i + asNumbersSumR(i - 1, 1, p + n + pl)) + asNumbersSumR(n - 1, i + 1, p) : "");
     }
 
     public static void main(String[] args) {
-
         System.out.println(asNumbersSum(5));
-
-
     }
-
-
 }
+
+
