@@ -23,6 +23,21 @@ public class Heap {
         freed = 0;
     }
 
+
+
+    public static void main(String[] args) {
+        String a = "DICTID, VERSION, GLOBALDOCID,\n" +
+                " DOCTYPEID, DOCTYPEVERSION, DOCSTATEID, CHECKLEVEL, CREATEDATE,\n" +
+                " CREATEUSERNAME, CREATEORGID, CREATEORGNAME, CREATEORGSYSTEMNAME, \n" +
+                " CREATECOMPLEXNAME, LASTMODIFYDATE, LASTMODIFYUSERNAME, LASTMODIFYCOMPLEXNAME,\n" +
+                " LOCALRPLVERSION, OUTERRPLCOMPLEXID, OUTERRPLVERSION, PRIORITY, HASATTACHES, \n" +
+                " LOCALRPLTIMESTAMP, ARCHIVE, HAS_ATTACHES, ATTACHES_SIZE, ATTACH_COUNT, VISIBILITYSCOPE, \n" +
+                " DELETED, DELETEDASROOT, CHILDREN_COUNT, LEAF_COUNT, ACCESSLEVEL, IDEMPOTENCY_KEYS, HAS_NOTIFICATION_CONFIG \n";
+String[] arr = a.split(",");
+                System.out.println(arr.length);
+
+    }
+
     int findToMalloc(int size) {
        Block findBlock = new Block(-1, size);
         Block currBlock = freeBlocks.ceiling(findBlock);
