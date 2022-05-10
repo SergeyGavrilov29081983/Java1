@@ -1,5 +1,9 @@
 package ru.progwards.java2.lessons.tests.calc;
 
+import ru.progwards.java2.lessons.annotation.After;
+import ru.progwards.java2.lessons.annotation.Before;
+import ru.progwards.java2.lessons.annotation.Test;
+
 public class SimpleCalculator {
 
     public static int sum(int val1, int val2) throws ArithmeticException {
@@ -9,7 +13,7 @@ public class SimpleCalculator {
         return val1 + val2;
     }
 
-    public static int diff(int val1, int val2) {
+    public  static int diff(int val1, int val2) {
         long longRes = ((long) val1) - val2;
         if (longRes > Integer.MAX_VALUE || longRes < Integer.MIN_VALUE)
             throw new ArithmeticException("Переполнение диапазона int при вычитании " + longRes);

@@ -1,9 +1,10 @@
 package ru.progwards.java2.lessons.reflection;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.*;
 
 public class GettersAndSetters {
     public static boolean HasGetter(String type, String name, Method[] methods) {
@@ -81,6 +82,86 @@ public class GettersAndSetters {
     }
 
     public static void main(String[] args) {
-        check("ru.progwards.java2.lessons.reflection.Person");
+
+        printAnnotation();
+
     }
+
+   static void setName(Person person, String name) {
+        Class clazz = person.getClass();
+        try {
+            Field field = clazz.getDeclaredField("name");
+            field.setAccessible(true);
+            field.set(person, name);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void callSetName(Person person, String name) {
+        try {
+           Method method =  person.getClass().getDeclaredMethod("setName", String.class);
+           method.setAccessible(true);
+            try {
+                method.invoke(person, name);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void printAnnotation() {
+        Class clazz = Greetings.class;
+        Method[] methods = clazz.getDeclaredMethods();
+        for (Method m: methods) {
+            AnnotationTest test = m.getAnnotation(AnnotationTest.class);
+            if(test != null) {
+                System.out.println(m.getName() + " " + test.text());
+            }
+        }
+    }
+
+    static Person callConstructor(String name) {
+        Class clazz = Person.class;
+
+        Constructor constructor;
+        Object obj;
+        try {
+           constructor = clazz.getDeclaredConstructor(String.class);
+           constructor.setAccessible(true);
+            try {
+               obj =  constructor.newInstance(name);
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        return (Person) obj;
+    }
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface AnnotationTest {
+    String text() default "Всегда говори привет";
+}
+
+
+
+
+class Greetings {
+    void hello() {}
+    @AnnotationTest
+    void goodday() {}
+    void goodnight() {}
+    void hi() {};
 }
