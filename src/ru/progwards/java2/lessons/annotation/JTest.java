@@ -71,7 +71,7 @@ public class JTest {
             if (test != null) {
                 try {
                     method.setAccessible(true);
-                    method.invoke(clazz, 1, 2);
+                    method.invoke(method.getClass());
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     throw new RuntimeException(e);
                 }
@@ -100,9 +100,10 @@ public class JTest {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         JTest jTest = new JTest();
-        jTest.run("ru.progwards.java2.lessons.tests.calc.SimpleCalculator");
+        jTest.run("ru.progwards.java2.lessons.annotation.CalculatorTest");
+
     }
 }
 
